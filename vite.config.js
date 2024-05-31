@@ -9,9 +9,10 @@ export default defineConfig({
     lib: {
       // src/indext.ts is where we have exported the component(s)
       entry: resolve(__dirname, "src/index.ts"),
+      // entry: "./src/index.ts",
       name: "VBachmVueComponentLibrary",
       // the name of the output files when the build is run
-      fileName: "vue-lib-vb",
+      fileName: "vue-lib",
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

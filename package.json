@@ -1,8 +1,24 @@
 {
-  "name": "vue-lib-vb",
-  "private": true,
+  "name": "@vbachm/vue-lib",
+  "private": false,
   "version": "0.0.0",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue-lib.umd.cjs",
+  "module": "./dist/vue-lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-lib.js",
+      "require": "./dist/vue-lib.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "exclude": [
+    "src/App.vue",
+    "src/main.js"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
