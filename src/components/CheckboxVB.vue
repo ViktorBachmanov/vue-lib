@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   size: {
     type: Number,
     default: 20,
@@ -21,14 +21,13 @@ defineProps({
     default: 1.5,
   },
   prefixLabel: String,
-  postfixLabel: String,    
+  postfixLabel: String,
+  id: String, 
 })
 const checked = defineModel()
 
-const id = (Math.random() + 1).toString(36).substring(7);
-
 function handleClick() {
-  document.getElementById(id).click()
+  document.getElementById(props.id).click()
 }
 </script>
 

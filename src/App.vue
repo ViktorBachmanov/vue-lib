@@ -32,6 +32,7 @@ function handleToggleTheme() {
       v-model="checked_2"
       postfixLabel="CheckboxVB-2"
       class="!text-blue-700 dark:!text-rose-700"
+      id="CheckboxVB-2"
     />
 
     <div class="bg-stone-500">
@@ -42,11 +43,13 @@ function handleToggleTheme() {
     <CheckboxVB 
       v-model="checked_3"
       postfixLabel="CheckboxVB-3"
+      id="CheckboxVB-3"
     />
 
     <CheckboxVB 
       v-model="checked_4"
       class="!text-blue-700 dark:!text-rose-700"
+      id="CheckboxVB-4"
     />
 
     <InputVB />
