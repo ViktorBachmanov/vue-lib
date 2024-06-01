@@ -15,24 +15,41 @@ defineProps({
   markWidth: {
     type: Number,
     default: 1.5,
-  }
+  },
+  prefixLabel: String,
+  postfixLabel: String,    
 })
 const checked = defineModel()
+
+const id = (Math.random() + 1).toString(36).substring(7);
+
+// const emit = defineEmits([''])
+
+function handleClick() {
+  document.getElementById(id).click()
+}
 </script>
 
 
 <template>
-  <label style="cursor: pointer">
-    <slot name="prefix"></slot>
+  <div>
+    <label 
+      :for="id"
+      v-if="prefixLabel"
+    >
+      {{ prefixLabel }}
+    </label>
 
     <div
       class="outer"
       :style="{ minHeight: size + 'px', maxHeight: size + 'px', minWidth: size + 'px', maxWidth: size + 'px',  }"
+      @click="handleClick"
     >
       <input 
         type="checkbox" 
         style="opacity: 0;"
         v-model="checked"
+        :id="id"
       >
 
       <svg 
@@ -65,8 +82,13 @@ const checked = defineModel()
       </svg>
     </div>
 
-    <slot name="postfix"></slot>
-  </label>
+    <label 
+      :for="id"
+      v-if="postfixLabel"
+    >
+      {{ postfixLabel }}
+    </label>
+  </div>
 </template>
 
 
@@ -78,6 +100,10 @@ const checked = defineModel()
   box-sizing: content-box;
 
   color: black;
+}
+
+label {
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {
