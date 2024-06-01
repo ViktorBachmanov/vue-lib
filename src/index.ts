@@ -1,3 +1,3 @@
-import VBCheckbox from "./components/VBCheckbox.vue";
+import CheckboxVB from "./components/CheckboxVB.vue";
 
-export { VBCheckbox };
+export { CheckboxVB };

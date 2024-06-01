@@ -1,4 +1,10 @@
 <script setup>
+defineProps({
+  borderColor: {
+    type: String,
+    default: null,
+  }
+})
 const checked = defineModel()
 </script>
 
@@ -6,10 +12,11 @@ const checked = defineModel()
 <template>
   <div
     style="position: relative; display: inline-block; min-width: 24px; min-height: 24px;"
+    class="outer"
   >
     <input 
       type="checkbox" 
-      style="visibility: hidden;"
+      style="opacity: 0;"
       v-model="checked"
     >
 
@@ -17,10 +24,11 @@ const checked = defineModel()
       width="24" 
       height="24"
       viewBox="0 0 24 24" 
-      :fill="checked ? 'black' : 'none'" 
-      :stroke="checked ? 'black' : '#1E1E1E'"
       xmlns="http://www.w3.org/2000/svg"
       style="position: absolute; top: 0; left: 0"
+      :fill="checked ? 'black' : 'none'" 
+      stroke="currentColor"
+      class="checkboxBorder"
     >
       <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
@@ -39,3 +47,16 @@ const checked = defineModel()
 
   </div>
 </template>
+
+
+<style scoped>
+.outer {
+  color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  .outer {
+    color: silver;
+  }
+}
+</style>
