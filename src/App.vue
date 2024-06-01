@@ -16,13 +16,15 @@ function handleToggleTheme() {
 </script>
 
 <template>
-  <!-- <div style="display: flex; flex-direction: column; gap: 1em"> -->
-  <div>
+  <div style="display: flex; flex-direction: column; gap: 1em">
     <button @click="handleToggleTheme">Toggle theme</button>
 
     <CheckboxVB 
       v-model="checked_1"
       prefixLabel="CheckboxVB-1"
+      class="text-sm"
+      borderClass="dark:text-gray-500"
+      labelClass="dark:text-gray-500"
     />
     
     <CheckboxVB 
@@ -40,16 +42,16 @@ function handleToggleTheme() {
       v-model="checked_3"
       postfixLabel="CheckboxVB-3"
     />
+
+    <CheckboxVB 
+      v-model="checked_4"
+      class="!text-blue-700 dark:!text-rose-700"
+    />
       
     <!-- </label> -->
   </div>
 
-  <CheckboxVB 
-        v-model="checked_4"
-        class="!text-blue-700 dark:!text-rose-700"
-      >
-        <!-- <template #postfix>CheckboxVB-2</template> -->
-      </CheckboxVB>
+  
   <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
 

@@ -4,9 +4,13 @@ defineProps({
     type: Number,
     default: 20,
   },
-  borderColor: {
+  borderClass: {
     type: String,
-    default: null,
+    default: '',
+  },
+  labelClass: {
+    type: String,
+    default: '',
   },
   borderWidth: {
     type: Number,
@@ -32,16 +36,17 @@ function handleClick() {
 
 
 <template>
-  <div>
+  <div class="outer">
     <label 
       :for="id"
       v-if="prefixLabel"
+      :class="labelClass"
     >
       {{ prefixLabel }}
     </label>
 
     <div
-      class="outer"
+      class="icon"
       :style="{ minHeight: size + 'px', maxHeight: size + 'px', minWidth: size + 'px', maxWidth: size + 'px',  }"
       @click="handleClick"
     >
@@ -58,9 +63,6 @@ function handleClick() {
         :viewBox="`0 0 ${size} ${size}`" 
         xmlns="http://www.w3.org/2000/svg"
         style="position: absolute; top: 0; left: 0"
-        :fill="checked ? 'black' : 'none'" 
-        stroke="currentColor"
-        :stroke-width="borderWidth"
       >
         <rect
           :x="borderWidth / 2"
@@ -68,6 +70,10 @@ function handleClick() {
           :width="size - borderWidth" 
           :height="size - borderWidth"
           rx="2"
+          :class="borderClass"
+          stroke="currentColor"
+          :stroke-width="borderWidth"
+          :fill="checked ? 'black' : 'none'" 
         />
 
         <path 
@@ -85,6 +91,7 @@ function handleClick() {
     <label 
       :for="id"
       v-if="postfixLabel"
+      :class="labelClass"
     >
       {{ postfixLabel }}
     </label>
@@ -94,6 +101,12 @@ function handleClick() {
 
 <style scoped>
 .outer {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.icon {
   position: relative; 
   display: inline-block; 
   cursor: pointer;
@@ -107,7 +120,7 @@ label {
 }
 
 @media (prefers-color-scheme: dark) {
-  .outer {
+  .icon {
     color: silver;
   }
 }
