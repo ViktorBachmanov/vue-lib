@@ -7,6 +7,7 @@ import CheckboxVB from './components/CheckboxVB.vue'
 
 const checked_1 = ref(false)
 const checked_2 = ref(false)
+const checked_3 = ref(false)
 
 function handleToggleTheme() {
   document.documentElement.classList.toggle('dark')
@@ -17,20 +18,19 @@ function handleToggleTheme() {
   <div style="display: flex; flex-direction: column; gap: 1em">
     <button @click="handleToggleTheme">Toggle theme</button>
 
-    <label>
-      <CheckboxVB 
-        v-model="checked_1"
-      />
-      CheckboxVB-1
-    </label>
+    <CheckboxVB 
+      v-model="checked_1"
+    >
+      <template #postfix>CheckboxVB-1</template>
+    </CheckboxVB>
 
-    <label>
+    
       <CheckboxVB 
         v-model="checked_2"
         class="!text-blue-700 dark:!text-rose-700"
-      />
-      CheckboxVB-2
-    </label>
+      >
+        <template #postfix>CheckboxVB-2</template>
+      </CheckboxVB>
 
     <div class="bg-stone-500">
       TailwindCSS
@@ -38,8 +38,10 @@ function handleToggleTheme() {
 
     <!-- <label> -->
       <CheckboxVB 
-        v-model="checked_1"
-      />
+        v-model="checked_3"
+      >
+        <template #postfix>CheckboxVB-3</template>
+      </CheckboxVB>
     <!-- </label> -->
   </div>
   <!-- <HelloWorld msg="Vite + Vue" /> -->
