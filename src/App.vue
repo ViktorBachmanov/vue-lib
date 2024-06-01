@@ -35,6 +35,12 @@ function handleToggleTheme() {
     <div class="bg-stone-500">
       TailwindCSS
     </div>
+
+    <!-- <label> -->
+      <CheckboxVB 
+        v-model="checked_1"
+      />
+    <!-- </label> -->
   </div>
   <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
