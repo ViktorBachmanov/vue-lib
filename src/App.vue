@@ -3,6 +3,7 @@
 import { ref } from 'vue'
 
 import CheckboxVB from './components/CheckboxVB.vue'
+import InputVB from './components/InputVB.vue'
 
 
 const checked_1 = ref(false)
@@ -47,6 +48,8 @@ function handleToggleTheme() {
       v-model="checked_4"
       class="!text-blue-700 dark:!text-rose-700"
     />
+
+    <InputVB />
       
     <!-- </label> -->
   </div>
