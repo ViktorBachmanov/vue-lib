@@ -27,8 +27,6 @@ const checked = defineModel()
 
 const id = (Math.random() + 1).toString(36).substring(7);
 
-// const emit = defineEmits([''])
-
 function handleClick() {
   document.getElementById(id).click()
 }
@@ -117,11 +115,5 @@ function handleClick() {
 
 label {
   cursor: pointer;
-}
-
-@media (prefers-color-scheme: dark) {
-  .icon {
-    color: silver;
-  }
 }
 </style>
