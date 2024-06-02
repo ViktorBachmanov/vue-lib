@@ -56,6 +56,7 @@ function handleToggleTheme() {
       wrapperClass="!border-gray-400 dark:!border-blue-400"
       colorLight="#6F46C4"
       colorDark="#6F46C4"
+      error="Введены некорректные данные"
     />
       
     <!-- </label> -->

@@ -89,6 +89,7 @@ const val = defineModel()
 }
 
 .input-vb-native {
+  font-size: 14px;
   background-color: transparent;
   outline: none;
   flex-grow: 1;
@@ -102,6 +103,8 @@ const val = defineModel()
 
 .error {
   min-height: 1.5em;
+  margin-left: 1em;
+  font-size: 14px;
   color: v-bind('errorColor');
 }
 
