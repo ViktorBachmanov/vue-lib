@@ -9,9 +9,13 @@ defineProps({
     type: String,
     default: '',
   },
-  errors: {
-    type: Array,
-    default: null,
+  errorSpace: {
+    type: Boolean,
+    default: true
+  },
+  error: {
+    type: String,
+    default: '',
   },
   bgColorLight: {
     type: String,
@@ -29,6 +33,10 @@ defineProps({
     type: String,
     default: 'white',
   },
+  errorColor: {
+    type: String,
+    default: '#EF4444',
+  },
   wrapperClass: String,
 })
 
@@ -41,6 +49,7 @@ const val = defineModel()
     <div 
       class="input-vb-wrapper"
       :class="wrapperClass"
+      :style="{ borderColor: error ? `${errorColor} !important` : null }"
     >
       <slot name="prefixIcon"></slot>
 
@@ -53,14 +62,12 @@ const val = defineModel()
       <slot name="postfixIcon"></slot>
     </div>
 
-    <ul v-if="errors" class="errors">
-      <li
-        class="error"
-        v-for="error in errors"
-      >
-        {{ error }}
-      </li>
-    </ul>
+    <div 
+      v-if="errorSpace" 
+      class="error"
+    >
+      {{ error }}
+    </div>
   </div>
 </template>
 
@@ -93,17 +100,14 @@ const val = defineModel()
   color: v-bind('colorDark')
 }
 
-.errors {
-  min-height: 1.5em;
-}
-
 .error {
-  color: rgb(158, 31, 31);
+  min-height: 1.5em;
+  color: v-bind('errorColor');
 }
 
-.dark .error {
+/* .dark .error {
   color: rgb(227, 37, 37);
-}
+} */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
