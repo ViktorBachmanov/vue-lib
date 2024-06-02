@@ -52,7 +52,11 @@ function handleToggleTheme() {
       id="CheckboxVB-4"
     />
 
-    <InputVB />
+    <InputVB 
+      wrapperClass="!border-orange-400 dark:!border-blue-400"
+      colorLight="#6F46C4"
+      colorDark="#6F46C4"
+    />
       
     <!-- </label> -->
   </div>

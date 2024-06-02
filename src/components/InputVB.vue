@@ -29,6 +29,7 @@ defineProps({
     type: String,
     default: 'white',
   },
+  wrapperClass: String,
 })
 
 const val = defineModel()
@@ -39,6 +40,7 @@ const val = defineModel()
   <div class="input-vb-outer">
     <div 
       class="input-vb-wrapper"
+      :class="wrapperClass"
     >
       <slot name="prefixIcon"></slot>
 
