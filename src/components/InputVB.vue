@@ -1,6 +1,8 @@
 <script setup>
+import { ref, watch } from 'vue';
 
-defineProps({
+
+const props = defineProps({
   type: {
     type: String,
     default: 'text',
@@ -41,6 +43,10 @@ defineProps({
 })
 
 const val = defineModel()
+
+const innerError = ref(props.error)
+
+watch(val, () => innerError.value = '')
 </script>
 
 
@@ -49,7 +55,7 @@ const val = defineModel()
     <div 
       class="input-vb-wrapper"
       :class="wrapperClass"
-      :style="{ borderColor: error ? `${errorColor} !important` : null }"
+      :style="{ borderColor: innerError ? `${errorColor} !important` : null }"
     >
       <slot name="prefixIcon"></slot>
 
@@ -66,7 +72,7 @@ const val = defineModel()
       v-if="errorSpace" 
       class="error"
     >
-      {{ error }}
+      {{ innerError }}
     </div>
   </div>
 </template>
