@@ -14,6 +14,9 @@ const checked_4 = ref(false)
 function handleToggleTheme() {
   document.documentElement.classList.toggle('dark')
 }
+
+const val = ref('someVal')
+const error = ref('')
 </script>
 
 <template>
@@ -58,7 +61,8 @@ function handleToggleTheme() {
       colorDark="#6F46C4"
       type="email"
       placeholder="Email"
-      error="Введены некорректные данные"
+      v-model:val="val"
+      v-model:error="error"
     />
       
     <!-- </label> -->
