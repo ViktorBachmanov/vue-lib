@@ -46,7 +46,10 @@ const val = defineModel()
 
 const innerError = ref(props.error)
 
-watch(val, () => innerError.value = '')
+function handleResetError() {
+  innerError.value = ''
+}
+
 </script>
 
 
@@ -64,6 +67,7 @@ watch(val, () => innerError.value = '')
         class="input-vb-native"
         :placeholder="placeholder"
         v-model="val"
+        @focus="handleResetError"
       >
       <slot name="postfixIcon"></slot>
     </div>
