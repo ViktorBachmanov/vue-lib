@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onUpdate } from 'vue';
+import { ref, watch, onUpdated } from 'vue';
 
 
 const props = defineProps({
@@ -50,7 +50,7 @@ watch(val, () => {
   innerError.value = ''
 })
 
-onUpdate(() => {
+onUpdated(() => {
   innerError.value = props.error
 })
 
