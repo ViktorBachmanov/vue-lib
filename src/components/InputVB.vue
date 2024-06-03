@@ -1,5 +1,5 @@
 <script setup>
-// import { ref } from 'vue';
+import { watch } from 'vue';
 
 
 const props = defineProps({
@@ -40,6 +40,10 @@ const props = defineProps({
 
 const val = defineModel('val')
 const error = defineModel('error')
+
+watch(val, () => {
+  error.value = ''
+})
 
 </script>
 
