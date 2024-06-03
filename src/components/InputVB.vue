@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onUpdate } from 'vue';
 
 
 const props = defineProps({
@@ -46,9 +46,13 @@ const val = defineModel()
 
 const innerError = ref(props.error)
 
-function handleResetError() {
+watch(val, () => {
   innerError.value = ''
-}
+})
+
+onUpdate(() => {
+  innerError.value = props.error
+})
 
 </script>
 
@@ -67,7 +71,6 @@ function handleResetError() {
         class="input-vb-native"
         :placeholder="placeholder"
         v-model="val"
-        @focus="handleResetError"
       >
       <slot name="postfixIcon"></slot>
     </div>
