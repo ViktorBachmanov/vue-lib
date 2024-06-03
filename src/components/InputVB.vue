@@ -38,7 +38,7 @@ const props = defineProps({
   wrapperClass: String,
 })
 
-const val = defineModel('val')
+const val = defineModel('value')
 const error = defineModel('error')
 
 watch(val, () => {
