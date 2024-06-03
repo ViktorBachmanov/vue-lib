@@ -1,6 +1,6 @@
 <script setup>
 // import HelloWorld from './components/HelloWorld.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import CheckboxVB from './components/CheckboxVB.vue'
 import InputVB from './components/InputVB.vue'
@@ -9,7 +9,7 @@ import InputVB from './components/InputVB.vue'
 const checked_1 = ref(false)
 const checked_2 = ref(false)
 const checked_3 = ref(false)
-const checked_4 = ref(false)
+const errorOn = ref(false)
 
 function handleToggleTheme() {
   document.documentElement.classList.toggle('dark')
@@ -17,10 +17,16 @@ function handleToggleTheme() {
 
 const val = ref('someVal')
 const error = ref('')
+
+watch(errorOn, (newVal) => {
+  error.value = newVal
+    ? 'Введены некорректные данные'
+    : ''
+})
 </script>
 
 <template>
-  <div style="display: flex; flex-direction: column; gap: 1em">
+  <div style="display: flex; flex-direction: column;">
     <button @click="handleToggleTheme">Toggle theme</button>
 
     <CheckboxVB 
@@ -50,9 +56,10 @@ const error = ref('')
     />
 
     <CheckboxVB 
-      v-model="checked_4"
+      v-model="errorOn"
       class="!text-blue-700 dark:!text-rose-700"
-      id="CheckboxVB-4"
+      id="ErrorOnCheckboxVB"
+      postfixLabel="Error On / Off"
     />
 
     <InputVB 
@@ -64,7 +71,8 @@ const error = ref('')
       v-model:val="val"
       v-model:error="error"
     />
-      
+    
+    <div style="border: 1px solid magenta; min-height: 2em"></div>
     <!-- </label> -->
   </div>
 

@@ -107,8 +107,10 @@ watch(val, () => {
 
 .error {
   min-height: 1.5em;
+  margin-top: 4px;
   margin-left: 1em;
   font-size: 14px;
+  line-height: 20px;
   color: v-bind('errorColor');
 }
 
