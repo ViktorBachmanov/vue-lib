@@ -4,6 +4,7 @@ import { ref, watch } from 'vue'
 
 import CheckboxVB from './components/CheckboxVB.vue'
 import InputVB from './components/InputVB.vue'
+import TextareaVB from './components/TextareaVB.vue'
 
 
 const checked_1 = ref(false)
@@ -23,6 +24,9 @@ watch(errorOn, (newVal) => {
     ? 'Введены некорректные данные'
     : ''
 })
+
+const textAreaValue = ref('')
+const textAreaError = ref('')
 </script>
 
 <template>
@@ -68,12 +72,25 @@ watch(errorOn, (newVal) => {
       colorDark="#6F46C4"
       type="email"
       placeholder="Email"
-      v-model:val="val"
+      v-model:value="val"
       v-model:error="error"
     />
     
     <div style="border: 1px solid magenta; min-height: 2em"></div>
     <!-- </label> -->
+
+    <TextareaVB
+      id="textAreaId"
+      label="Textarea"
+      v-model:value="textAreaValue"
+      v-model:error="textAreaError"
+      labelClass="ml-[20px] dark:text-gray-300"
+      textareaClass="rounded-[20px] p-4 resize-none dark:text-gray-300 border border-slate-800 dark:border-slate-300"
+    />
+
+    <textarea>
+      kjsdnksjn skjnckj
+    </textarea>
   </div>
 
   
