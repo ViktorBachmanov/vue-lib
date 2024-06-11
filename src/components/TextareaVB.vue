@@ -39,17 +39,15 @@ watch(val, () => {
     <textarea
       :id="id"
       :class="textareaClass"
-    >
-      {{ val }}
-    </textarea>
+      v-model="val"
+      :style="{ borderColor: error ? 'red' : null }"
+    ></textarea>
 
     <div 
       v-if="errorSpace" 
       class="error"
       :class="errorClass"
-    >
-      {{ error }}
-    </div>
+    >{{ error }}</div>
   </div>
 </template>
 
@@ -68,14 +66,15 @@ label {
 textarea {
   background-color: transparent;
   outline: none;
+  display: block;
 }
 
 .error {
   min-height: 1.5em;
-  margin-top: 4px;
+  /* margin-top: 4px; */
   margin-left: 1em;
   font-size: 14px;
-  line-height: 20px;
+  /* line-height: 20px; */
   color: red;
 }
 </style>

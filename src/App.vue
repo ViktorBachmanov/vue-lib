@@ -1,6 +1,6 @@
 <script setup>
 // import HelloWorld from './components/HelloWorld.vue'
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 
 import CheckboxVB from './components/CheckboxVB.vue'
 import InputVB from './components/InputVB.vue'
@@ -25,8 +25,20 @@ watch(errorOn, (newVal) => {
     : ''
 })
 
-const textAreaValue = ref('')
-const textAreaError = ref('')
+const textareaValue = ref('kbkjb')
+const textareaError = ref('')
+
+const textareaClass = computed(() => {
+  let taClass = 'rounded-[20px] p-4 resize-none dark:text-gray-300 border '
+
+  return textareaError.value
+    ? taClass + '!border-red-700 dark:!border-red-500'
+    : taClass + '!border-slate-800 dark:!border-slate-300'
+})
+
+function handleSubmit() {
+  textareaError.value = 'Должно быть заполнено'
+}
 </script>
 
 <template>
@@ -82,11 +94,23 @@ const textAreaError = ref('')
     <TextareaVB
       id="textAreaId"
       label="Textarea"
-      v-model:value="textAreaValue"
-      v-model:error="textAreaError"
+      v-model:value="textareaValue"
+      v-model:error="textareaError"
       labelClass="ml-[20px] dark:text-gray-300"
-      textareaClass="rounded-[20px] p-4 resize-none dark:text-gray-300 border border-slate-800 dark:border-slate-300"
+      :textareaClass="textareaClass"
     />
+
+    <pre 
+      style="border: 1px green solid"
+      class="m-4"
+    >{{ textareaValue }}</pre>
+
+    <button
+      @click="handleSubmit"
+      class="m-4"
+    >
+      Submit
+    </button>
 
     <textarea>
       kjsdnksjn skjnckj
@@ -97,6 +121,18 @@ const textAreaError = ref('')
   <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
 
-<style scoped>
+
+<style>
+.test-class {
+  border: 2px solid blue !important;
+}
+
+.dark .test-class {
+  border: 2px solid cyan !important;
+}
+
+.test-class-error {
+  border: 2px solid orange !important;
+}
 
 </style>
