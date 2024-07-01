@@ -36,6 +36,7 @@ const props = defineProps({
     default: '#EF4444',
   },
   wrapperClass: String,
+  inputClass: String,
 })
 
 const val = defineModel('value')
@@ -59,9 +60,9 @@ watch(val, () => {
 
       <input
         :type="type"
-        class="input-vb-native"
         :placeholder="placeholder"
         v-model="val"
+        :class="inputClass"
       >
       <slot name="postfixIcon"></slot>
     </div>
@@ -92,8 +93,7 @@ watch(val, () => {
   width: 100%;
 }
 
-.input-vb-native {
-  font-size: 14px;
+input {
   background-color: transparent;
   outline: none;
   flex-grow: 1;
@@ -101,7 +101,7 @@ watch(val, () => {
   color: v-bind('colorLight')
 }
 
-.dark .input-vb-native {
+.dark input {
   color: v-bind('colorDark')
 }
 
