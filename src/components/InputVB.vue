@@ -37,6 +37,13 @@ const props = defineProps({
   },
   wrapperClass: String,
   inputClass: String,
+  id: String,
+  label: String,
+  labelClass: String,
+  readonly: {
+    type: Boolean,
+    default: false,
+  }
 })
 
 const val = defineModel('value')
@@ -51,6 +58,14 @@ watch(val, () => {
 
 <template>
   <div class="input-vb-outer">
+    <label 
+      :for="id"
+      v-if="label"
+      :class="labelClass"
+    >
+      {{ label }}
+    </label>
+
     <div 
       class="input-vb-wrapper"
       :class="wrapperClass"
@@ -59,10 +74,12 @@ watch(val, () => {
       <slot name="prefixIcon"></slot>
 
       <input
+        :id="id"
         :type="type"
         :placeholder="placeholder"
         v-model="val"
         :class="inputClass"
+        :readonly="readonly"
       >
       <slot name="postfixIcon"></slot>
     </div>

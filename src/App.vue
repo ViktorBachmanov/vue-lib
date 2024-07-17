@@ -86,6 +86,8 @@ function handleSubmit() {
       placeholder="Email"
       v-model:value="val"
       v-model:error="error"
+      id="emailInputId"
+      label="Email"
     />
     
     <div style="border: 1px solid magenta; min-height: 2em"></div>
