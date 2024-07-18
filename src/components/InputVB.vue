@@ -114,6 +114,7 @@ input {
   background-color: transparent;
   outline: none;
   flex-grow: 1;
+  max-width: 100%;
 
   color: v-bind('colorLight')
 }
