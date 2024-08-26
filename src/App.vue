@@ -41,21 +41,24 @@ function handleSubmit() {
   textareaError.value = 'Должно быть заполнено'
 }
 
-const selectVal = ref({})
+const selectValObj = ref({})
 </script>
 
 <template>
   <div style="display: flex; flex-direction: column;">
     <button @click="handleToggleTheme">Toggle theme</button>
 
-    <SelectVB
-      class="my-10 dark:text-white"
-      selectElClass="border border-1 border-black dark:border-white rounded-lg"
-      :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
-      v-model:value="selectVal"
-    />
+    <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
+      <legend class="text-black dark:text-white">Object</legend>
+      <SelectVB
+        class="my-10 dark:text-white"
+        selectElClass="border border-1 border-black dark:border-white rounded-lg"
+        :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
+        v-model:value="selectValObj"
+      />
 
-    <pre class="mb-10 dark:text-white">{{ selectVal }}</pre>
+      <pre class="mb-10 dark:text-white">{{ selectValObj }}</pre>
+    </fieldset>
 
     <CheckboxVB 
       v-model="checked_1"

@@ -15,6 +15,10 @@ const props = defineProps({
     type: String,
     default: 'label',
   },
+  valueKey: {
+    type: String,
+    default: 'id',
+  },
   multiple: {
     type: Boolean,
     default: false,
@@ -60,6 +64,18 @@ function handleSelectOption(option) {
     val.value = option
   }
 }
+
+function isSelected(option) {
+  console.log('isSelected')
+  if (typeof val.value === 'string' || val.value instanceof String) {
+    return val.value === option
+  } else if (Array.isArray(val.value)) {
+    console.log('isArray')
+    return val.value.some(item => item[props.valueKey] === option[props.valueKey])
+  } else if (typeof val.value === 'object') {
+    return val.value[props.valueKey] === option[props.valueKey]
+  }
+}
 </script>
 
 <template>
@@ -93,7 +109,10 @@ function handleSelectOption(option) {
         class="select-vb-option"
         @click="handleSelectOption(option)"
       >
-        {{ option[labelKey] }}
+        <div class="flex justify-between">
+          {{ option[labelKey] }}
+          <span v-if="isSelected(option)">&check;</span>
+        </div>
       </li>
     </ul>
   </div>
