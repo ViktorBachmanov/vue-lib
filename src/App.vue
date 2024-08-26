@@ -5,6 +5,7 @@ import { ref, watch, computed } from 'vue'
 import CheckboxVB from './components/CheckboxVB.vue'
 import InputVB from './components/InputVB.vue'
 import TextareaVB from './components/TextareaVB.vue'
+import SelectVB from './components/SelectVB.vue'
 
 
 const checked_1 = ref(false)
@@ -39,11 +40,22 @@ const textareaClass = computed(() => {
 function handleSubmit() {
   textareaError.value = 'Должно быть заполнено'
 }
+
+const selectVal = ref({})
 </script>
 
 <template>
   <div style="display: flex; flex-direction: column;">
     <button @click="handleToggleTheme">Toggle theme</button>
+
+    <SelectVB
+      class="my-10 dark:text-white"
+      selectElClass="border border-1 border-black dark:border-white rounded-lg"
+      :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
+      v-model:value="selectVal"
+    />
+
+    <pre class="mb-10 dark:text-white">{{ selectVal }}</pre>
 
     <CheckboxVB 
       v-model="checked_1"
