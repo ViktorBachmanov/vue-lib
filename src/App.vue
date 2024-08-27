@@ -5,6 +5,7 @@ import { ref, watch, computed } from 'vue'
 import CheckboxVB from './components/CheckboxVB.vue'
 import InputVB from './components/InputVB.vue'
 import TextareaVB from './components/TextareaVB.vue'
+import SelectVB from './components/SelectVB.vue'
 
 
 const checked_1 = ref(false)
@@ -39,11 +40,45 @@ const textareaClass = computed(() => {
 function handleSubmit() {
   textareaError.value = 'Должно быть заполнено'
 }
+
+const selectValStr = ref('')
+const selectValObj = ref({})
+const selectValArr = ref([])
 </script>
 
 <template>
   <div style="display: flex; flex-direction: column;">
-    <button @click="handleToggleTheme">Toggle theme</button>
+    <button 
+      @click="handleToggleTheme"
+      class="mt-[500px]"
+    >Toggle theme</button>
+
+    <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
+      <legend class="text-black dark:text-white">String</legend>
+      <SelectVB
+        class="my-10 dark:text-white"
+        selectElClass="border border-1 border-black dark:border-white rounded-lg"
+        :options="['White', 'Black']"
+        v-model:value="selectValStr"
+        optionsClass="!bg-slate-200 dark:!bg-slate-800"
+      />
+
+      <pre class="mb-10 dark:text-white">{{ selectValStr }}</pre>
+    </fieldset>
+
+    <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
+      <legend class="text-black dark:text-white">Object</legend>
+      <SelectVB
+        class="my-10 dark:text-white"
+        selectElClass="border border-1 border-black dark:border-white rounded-lg"
+        :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
+        v-model:value="selectValObj"
+      />
+
+      <pre class="mb-10 dark:text-white">{{ selectValObj }}</pre>
+    </fieldset>
+
+    
 
     <CheckboxVB 
       v-model="checked_1"
@@ -117,6 +152,19 @@ function handleSubmit() {
     <textarea>
       kjsdnksjn skjnckj
     </textarea>
+
+    <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
+      <legend class="text-black dark:text-white">Array</legend>
+      <SelectVB
+        class="my-10 dark:text-white"
+        selectElClass="border border-1 border-black dark:border-white rounded-lg"
+        :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
+        v-model:value="selectValArr"
+        multiple
+      />
+
+      <!-- <pre class="mb-10 dark:text-white">{{ selectValArr }}</pre> -->
+    </fieldset>
   </div>
 
   
