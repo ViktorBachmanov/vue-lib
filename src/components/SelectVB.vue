@@ -60,6 +60,13 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  errorColor: {
+    type: Object,
+    default: {
+      light: '#991b1b',
+      dark: '#b91c1c'
+    }
+  }
 })
 
 const val = defineModel('value')
@@ -209,7 +216,7 @@ function handleClick(event) {
     <div
       ref="selectEl"
       class="select-vb-el"
-      :class="selectElClass"
+      :class="[selectElClass, { 'select-vb-error-border': error }]"
       @click="handleClick"
     >
       <div
@@ -292,10 +299,18 @@ function handleClick(event) {
   margin-top: 4px;
   margin-left: 8px;
   min-height: 20px;
-  color: rgb(185 28 28);
+  color: v-bind('errorColor.light');
 
   .dark & {
-    color: rgb(220 38 38);
+    color: v-bind('errorColor.dark');
+  }
+}
+
+.select-vb-error-border {
+  border-color: v-bind('errorColor.light');
+
+  .dark & {
+    border-color: v-bind('errorColor.dark');
   }
 }
 
