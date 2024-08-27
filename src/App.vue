@@ -42,6 +42,7 @@ function handleSubmit() {
 }
 
 const selectValStr = ref('')
+const selectErrorStr = ref('выберите')
 const selectValObj = ref({})
 const selectValArr = ref([])
 </script>
@@ -61,6 +62,9 @@ const selectValArr = ref([])
         :options="['White', 'Black']"
         v-model:value="selectValStr"
         optionsClass="!bg-slate-200 dark:!bg-slate-800"
+        label="String select"
+        :error-space="true"
+        v-model:error="selectErrorStr"
       />
 
       <pre class="mb-10 dark:text-white">{{ selectValStr }}</pre>

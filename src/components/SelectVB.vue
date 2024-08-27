@@ -27,6 +27,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  label: String,
+  labelClass: {
+    type: String,
+    default: '',
+  },
   selectElClass: {
     type: String,
     default: '',
@@ -44,6 +49,14 @@ const props = defineProps({
     default: ''
   },
   placeholderClass: {
+    type: String,
+    default: ''
+  },
+  errorSpace: {
+    type: Boolean,
+    default: false,
+  },
+  errorClass: {
     type: String,
     default: ''
   },
@@ -185,6 +198,14 @@ function handleClick(event) {
 
 <template>
   <div class="select-vb-outer">
+    <div 
+      v-if="label" 
+      class="select-vb-label"
+      :class="labelClass"
+    >
+      {{ label }}
+    </div>
+
     <div
       ref="selectEl"
       class="select-vb-el"
@@ -253,10 +274,37 @@ function handleClick(event) {
       </Transition>
     </div>
 
+    <div 
+      v-if="errorSpace"
+      class="select-vb-error"
+      :class="errorClass"
+    >
+      {{ error }}
+    </div>
+
   </div>
 </template>
 
 <style scoped>
+.select-vb-error {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 4px;
+  margin-left: 8px;
+  min-height: 20px;
+  color: rgb(185 28 28);
+
+  .dark & {
+    color: rgb(220 38 38);
+  }
+}
+
+.select-vb-label {
+  font-size: 14px;
+  line-height: 20px;
+  margin-left: 1em;
+}
+
 .select-vb-el {
   cursor: pointer;
   position: relative;
@@ -286,16 +334,10 @@ function handleClick(event) {
   border-style: solid;
   border-width: 1px;
   border-color: rgb(27, 26, 26);
-
-  .dark & {
-    border-color: rgb(224, 214, 214);
-  }
-}
-
-ul {
   background-color: white;
 
   .dark & {
+    border-color: rgb(224, 214, 214);
     background-color: black;
   }
 }
