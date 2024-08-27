@@ -48,7 +48,10 @@ const selectValArr = ref([])
 
 <template>
   <div style="display: flex; flex-direction: column;">
-    <button @click="handleToggleTheme">Toggle theme</button>
+    <button 
+      @click="handleToggleTheme"
+      class="mt-[500px]"
+    >Toggle theme</button>
 
     <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
       <legend class="text-black dark:text-white">String</legend>
@@ -75,18 +78,7 @@ const selectValArr = ref([])
       <pre class="mb-10 dark:text-white">{{ selectValObj }}</pre>
     </fieldset>
 
-    <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
-      <legend class="text-black dark:text-white">Array</legend>
-      <SelectVB
-        class="my-10 dark:text-white"
-        selectElClass="border border-1 border-black dark:border-white rounded-lg"
-        :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
-        v-model:value="selectValArr"
-        multiple
-      />
-
-      <pre class="mb-10 dark:text-white">{{ selectValArr }}</pre>
-    </fieldset>
+    
 
     <CheckboxVB 
       v-model="checked_1"
@@ -160,6 +152,19 @@ const selectValArr = ref([])
     <textarea>
       kjsdnksjn skjnckj
     </textarea>
+
+    <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
+      <legend class="text-black dark:text-white">Array</legend>
+      <SelectVB
+        class="my-10 dark:text-white"
+        selectElClass="border border-1 border-black dark:border-white rounded-lg"
+        :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
+        v-model:value="selectValArr"
+        multiple
+      />
+
+      <!-- <pre class="mb-10 dark:text-white">{{ selectValArr }}</pre> -->
+    </fieldset>
   </div>
 
   

@@ -125,13 +125,14 @@ function close() {
 }
 
 onUpdated(() => {  
-  setOptionsWidth()   
+  setOptionsWidth()
 })
 
 watch(isOpen, async (newVal) => {
   if (newVal) {
     await nextTick()
     setOptionsWidth()
+    setOptionsOffset()
   }
 })
 
@@ -139,6 +140,20 @@ function setOptionsWidth() {
   if (optionsEl.value) {
     const width = selectEl.value.getBoundingClientRect().width
     optionsEl.value.style.width = width + 'px'
+  }
+}
+
+function setOptionsOffset() {
+  const selectElHeight = selectEl.value.getBoundingClientRect().height
+  const gap = 5;
+
+  if (optionsEl.value) {
+    const bottomEdgeCoord = optionsEl.value.getBoundingClientRect().bottom;
+    if(bottomEdgeCoord > document.documentElement.clientHeight) {
+      optionsEl.value.style.bottom = selectElHeight + gap + 'px';
+    } else {      
+      optionsEl.value.style.top = selectElHeight + gap + 'px'
+    }
   }
 }
 
@@ -247,8 +262,10 @@ function handleClick(event) {
   position: relative;
   padding: .5em;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 1em;
 }
 
 .select-vb-placeholder {
@@ -261,7 +278,7 @@ function handleClick(event) {
 
 .select-vb-options {
   position: absolute;
-  top: 3em;
+  /* top: 3em; */
   left: 0;
   border-radius: .5em;
   max-height: 380px;
