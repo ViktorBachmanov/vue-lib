@@ -177,21 +177,23 @@ function handleClick(event) {
       @click="handleClick"
     >
       <div
-        v-if="chips"
-      >
-        <div
-          v-for="item in items"
-        >
-
-        </div>
-      </div>
-
-      <div
-        v-else-if="isNoneSelected"
+        v-if="isNoneSelected"
         :class="placeholderClass"
         class="select-vb-placeholder"
       >
         {{ placeholder }}
+      </div>
+
+      <div
+        v-else-if="chips"
+        class="select-vb-chips"
+      >
+        <div
+          v-for="item in items"
+          class="select-vb-chip"
+        >
+          {{ item[labelKey] }}
+        </div>
       </div>
 
       <div
@@ -205,7 +207,7 @@ function handleClick(event) {
         fill="none" 
         viewBox="0 0 24 24" 
         stroke-width="2" 
-        stroke="#D3D5D7" 
+        stroke="currentColor" 
         class="select-vb-postfix-icon"
       >
         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -240,10 +242,6 @@ function handleClick(event) {
 </template>
 
 <style scoped>
-/* .select-vb-outer {
-  
-} */
-
 .select-vb-el {
   cursor: pointer;
   position: relative;
@@ -254,14 +252,18 @@ function handleClick(event) {
 }
 
 .select-vb-placeholder {
-  color: rgb(210, 196, 196);
+  color: rgb(37, 33, 33);
+
+  .dark & {
+    color: rgb(210, 196, 196);
+  }
 }
 
 .select-vb-options {
   position: absolute;
   top: 3em;
   left: 0;
-  border-radius: 1em;
+  border-radius: .5em;
   max-height: 380px;
   overflow: auto;
   border-style: solid;
@@ -294,6 +296,24 @@ li {
   }
 }
 
+.select-vb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .33em;
+}
+
+.select-vb-chip {
+  padding: 0 .25em;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: .5em;
+  border-color: black;
+
+  .dark & {
+    border-color: white;
+  }
+}
+
 .select-vb-check-mark {
   margin-right: .25em;
 }
@@ -306,6 +326,11 @@ li {
 .select-vb-postfix-icon {
   width: 16px;
   /* height: 20px; */
+  color: rgb(43, 40, 40);
+
+  .dark & {
+    color: rgb(207, 190, 190);
+  }
 }
 
 .v-enter-active,
