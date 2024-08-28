@@ -32,7 +32,7 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  selectElClass: {
+  selectClass: {
     type: String,
     default: '',
   },
@@ -66,6 +66,10 @@ const props = defineProps({
       light: '#991b1b',
       dark: '#b91c1c'
     }
+  },
+  postfixIconClass: {
+    type: String,
+    default: '',
   }
 })
 
@@ -216,7 +220,7 @@ function handleClick(event) {
     <div
       ref="selectEl"
       class="select-vb-el"
-      :class="[selectElClass, { 'select-vb-error-border': error }]"
+      :class="[selectClass, { 'select-vb-error-border': error }]"
       @click="handleClick"
     >
       <div
@@ -252,6 +256,7 @@ function handleClick(event) {
         stroke-width="2" 
         stroke="currentColor" 
         class="select-vb-postfix-icon"
+        :class="postfixIconClass"
       >
         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
       </svg>
@@ -318,6 +323,7 @@ function handleClick(event) {
   font-size: 14px;
   line-height: 20px;
   margin-left: 1em;
+  margin-bottom: 4px;
 }
 
 .select-vb-el {
