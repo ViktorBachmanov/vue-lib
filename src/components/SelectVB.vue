@@ -63,14 +63,14 @@ const props = defineProps({
   errorColor: {
     type: Object,
     default: {
-      light: '#991b1b',
+      light: '#dc2626',
       dark: '#b91c1c'
     }
   },
-  postfixIconClass: {
-    type: String,
-    default: '',
-  }
+  // postfixIconClass: {
+  //   type: String,
+  //   default: '',
+  // }
 })
 
 const val = defineModel('value')
@@ -249,17 +249,7 @@ function handleClick(event) {
         {{ items }}
       </div>
 
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        fill="none" 
-        viewBox="0 0 24 24" 
-        stroke-width="2" 
-        stroke="currentColor" 
-        class="select-vb-postfix-icon"
-        :class="postfixIconClass"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-      </svg>
+      <slot name="postfixIcon"></slot>
 
       <Transition
       >
@@ -403,15 +393,14 @@ li {
   justify-content: space-between;
 }
 
-.select-vb-postfix-icon {
+/* .select-vb-postfix-icon {
   width: 16px;
-  /* height: 20px; */
   color: rgb(43, 40, 40);
 
   .dark & {
     color: rgb(207, 190, 190);
   }
-}
+} */
 
 .v-enter-active,
 .v-leave-active {
