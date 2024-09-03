@@ -6,6 +6,7 @@ import CheckboxVB from './components/CheckboxVB.vue'
 import InputVB from './components/InputVB.vue'
 import TextareaVB from './components/TextareaVB.vue'
 import SelectVB from './components/SelectVB.vue'
+import ToggleVB from './components/ToggleVB.vue'
 
 
 const checked_1 = ref(false)
@@ -45,13 +46,27 @@ const selectValStr = ref('')
 const selectErrorStr = ref('выберите')
 const selectValObj = ref({})
 const selectValArr = ref([])
+
+const mode = ref('read')
 </script>
 
 <template>
   <div style="display: flex; flex-direction: column;">
     <button 
       @click="handleToggleTheme"
-    >Toggle theme</button>
+      class="mb-10"
+    >Toggle theme
+    </button>
+
+    <ToggleVB
+      left-value="read"
+      right-value="edit"
+      v-model="mode"
+    >
+      <template #right>
+        <div class="text-black dark:text-white">Редактировать</div>
+      </template>
+    </ToggleVB>
 
     <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
       <legend class="text-black dark:text-white">String</legend>
