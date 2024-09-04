@@ -23,7 +23,7 @@ function handleToggle() {
     >
       <div 
         class="toggle-vb-handle"
-        :style="[ state == props.leftValue ? 'left: 0' : 'right: 0' ]"
+        :style="[ state == props.leftValue ? 'left: 1px' : 'right: 1px' ]"
       ></div>
     </div>
 
@@ -41,21 +41,23 @@ function handleToggle() {
 .toggle-vb-body {
   min-height: 20px;
   width: 40px;
-  border: 1px solid magenta;
+  border: 2px solid #6b7280;
   border-top-right-radius: 9999px;
   border-bottom-right-radius: 9999px;
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
   position: relative;
   cursor: pointer;
+  background-color: #9ca3af;
 }
 
 .toggle-vb-handle {
-  min-height: 18px;
-  width: 18px;
+  min-height: 14px;
+  width: 14px;
   border-radius: 50%;
-  border: 1px solid cyan;
+  border: 2px solid #4b5563;
   position: absolute;
-  top: 0;
+  top: 1px;
+  background-color: #6b7280;
 }
 </style>
