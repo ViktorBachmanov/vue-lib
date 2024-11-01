@@ -27,6 +27,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  chipClass: {
+    type: String,
+    default: '',
+  },
+  chipsClass: {
+    type: String,
+    default: '',
+  },
   label: String,
   labelClass: {
     type: String,
@@ -234,12 +242,18 @@ function handleClick(event) {
       <div
         v-else-if="chips"
         class="select-vb-chips"
+        :class="chipsClass"
       >
         <div
           v-for="item in items"
           class="select-vb-chip"
+          :class="chipClass"
         >
+          <div @click.stop="handleSelectOption(item)">
+            <slot name="prefixChipIcon"></slot>
+          </div>
           {{ item[labelKey] }}
+          <slot name="postfixChipIcon"></slot>
         </div>
       </div>
 
@@ -377,6 +391,8 @@ li {
   border-style: solid;
   border-width: 1px;
   border-radius: .5em;
+  display: flex;
+  align-items: center;
   border-color: black;
 
   .dark & {

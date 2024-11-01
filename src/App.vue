@@ -6,6 +6,7 @@ import CheckboxVB from './components/CheckboxVB.vue'
 import InputVB from './components/InputVB.vue'
 import TextareaVB from './components/TextareaVB.vue'
 import SelectVB from './components/SelectVB.vue'
+import IconX from './components/icon/IconX.vue';
 
 
 const checked_1 = ref(false)
@@ -177,7 +178,15 @@ const selectValArr = ref([])
         :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
         v-model:value="selectValArr"
         multiple
-      />
+        chips
+        chip-class="!text-[15.31px] !text-white !p-[7px] !pr-[9px] !rounded-[15px] bg-[#95C11F] !max-h-[30px] !gap-[4px] !border-0"
+        chips-class="!gap-[10px]"
+      >
+        <template #prefixChipIcon>
+          <IconX class="text-white"/>
+        </template>
+      </SelectVB>
+
 
       <!-- <pre class="mb-10 dark:text-white">{{ selectValArr }}</pre> -->
     </fieldset>
