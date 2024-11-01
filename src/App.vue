@@ -174,7 +174,7 @@ const selectValArr = ref([])
       <legend class="text-black dark:text-white">Array</legend>
       <SelectVB
         class="my-10 dark:text-white"
-        selectClass="border border-1 border-black dark:border-white rounded-lg"
+        selectClass="border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px]"
         :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
         v-model:value="selectValArr"
         multiple
