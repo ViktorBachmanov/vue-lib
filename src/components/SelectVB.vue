@@ -81,10 +81,10 @@ const props = defineProps({
       dark: '#b91c1c'
     }
   },
-  // postfixIconClass: {
-  //   type: String,
-  //   default: '',
-  // }
+  zIndex: {
+    type: Number,
+    default: 55,
+  }
 })
 
 const val = defineModel('value')
@@ -249,7 +249,7 @@ function handleClick(event) {
     <div class="relative">
       <div
         ref="selectEl"
-        class="select-vb-el !z-[75]"
+        class="select-vb-el"
         :class="[selectClass, { 'select-vb-error-border': error }]"
         @click="handleClick"
       >
@@ -300,7 +300,7 @@ function handleClick(event) {
       >
         <ul
           ref="optionsEl"
-          class="select-vb-options !z-[54]"
+          class="select-vb-options"
           :class="optionsClass"
           v-if="isOpen"
         >
@@ -368,8 +368,8 @@ function handleClick(event) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* justify-content: space-between; */
   gap: 1em;
+  z-index: v-bind('zIndex + 1');
 }
 
 .select-vb-placeholder {
@@ -388,6 +388,7 @@ function handleClick(event) {
   overflow: auto;
   border-style: solid;
   border-width: 1px;
+  z-index: v-bind('zIndex');
   border-color: rgb(27, 26, 26);
 
   .dark & {

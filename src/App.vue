@@ -184,6 +184,7 @@ const selectValArr = ref([])
         chips-class="!gap-[10px]"
         optionsClass="whitespace-nowrap !rounded-[20px]"
         options-placement="under"
+        :z-index="55"
       >
         <template #prefixIcon>
           <IconX class="rotate-45 ml-2"/>
