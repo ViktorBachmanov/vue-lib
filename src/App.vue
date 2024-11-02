@@ -28,7 +28,7 @@ watch(errorOn, (newVal) => {
     : ''
 })
 
-const textareaValue = ref('kbkjb')
+const textareaValue = ref('')
 const textareaError = ref('')
 
 const textareaClass = computed(() => {
@@ -153,6 +153,8 @@ const selectValArr = ref([])
       v-model:error="textareaError"
       labelClass="ml-[20px] dark:text-gray-300"
       :textareaClass="textareaClass"
+      placeholder="Опишите подробно"
+      :placeholderCSS="{ fontSize: '16px', color: 'blue' }"
     />
 
     <pre 

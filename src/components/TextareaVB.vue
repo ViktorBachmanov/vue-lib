@@ -8,6 +8,13 @@ defineProps({
     type: String,
     default: '',
   },
+  placeholderCss: {
+    type: Object,
+    default: {
+      fontSize: '16px',
+      color: '#AEAEAE',
+    }
+  },
   errorSpace: {
     type: Boolean,
     default: true
@@ -41,6 +48,7 @@ watch(val, () => {
       :class="textareaClass"
       v-model="val"
       :style="{ borderColor: error ? 'red' : null }"
+      :placeholder="placeholder"
     ></textarea>
 
     <div 
@@ -67,6 +75,11 @@ textarea {
   background-color: transparent;
   outline: none;
   display: block;
+}
+
+textarea::placeholder {
+  font-size: v-bind('placeholderCss.fontSize');
+  color: v-bind('placeholderCss.color');
 }
 
 .error {
