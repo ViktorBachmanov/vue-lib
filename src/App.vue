@@ -185,6 +185,10 @@ const selectValArr = ref([])
         optionsClass="whitespace-nowrap !rounded-[20px]"
         options-placement="under"
       >
+        <template #prefixIcon>
+          <IconX class="rotate-45 ml-2"/>
+        </template>
+
         <template #prefixChipIcon>
           <IconX class="text-white"/>
         </template>

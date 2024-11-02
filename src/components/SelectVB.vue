@@ -253,6 +253,8 @@ function handleClick(event) {
         :class="[selectClass, { 'select-vb-error-border': error }]"
         @click="handleClick"
       >
+        <slot name="prefixIcon"></slot>
+
         <div
           v-if="isNoneSelected"
           :class="placeholderClass"
@@ -274,8 +276,12 @@ function handleClick(event) {
             <div @click.stop="handleSelectOption(item)">
               <slot name="prefixChipIcon"></slot>
             </div>
+
             {{ item[labelKey] }}
-            <slot name="postfixChipIcon"></slot>
+
+            <div @click.stop="handleSelectOption(item)">
+              <slot name="postfixChipIcon"></slot>
+            </div>
           </div>
         </div>
 
@@ -285,7 +291,9 @@ function handleClick(event) {
           {{ items }}
         </div>
 
-        <slot name="postfixIcon"></slot>
+        <div style="margin-left: auto">
+          <slot name="postfixIcon"></slot>
+        </div>
       </div>
 
       <Transition
@@ -360,7 +368,7 @@ function handleClick(event) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 1em;
 }
 
