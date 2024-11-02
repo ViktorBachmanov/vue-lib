@@ -212,13 +212,13 @@ function setOptionsOffset() {
 
 function handleClick(event) {
   if (event.target === optionsEl.value || event.target.closest('.select-vb-options')) {
-    // console.log('click on options')
+    console.log('click on options')
     event.stopPropagation()
     return
   }
   
   if (event.target === selectEl.value || event.target.closest('.select-vb-el')) {
-    // console.log('click on select element')
+    console.log('click on select element')
     if (!isOpen.value) {
       open()
     } else {
@@ -228,7 +228,7 @@ function handleClick(event) {
     return
   }
 
-  // console.log('click outside')
+  console.log('click outside')
 
   if (isOpen.value) {
     close()
@@ -306,7 +306,7 @@ function handleClick(event) {
         >
           <li
             v-for="option in options"
-            @click="handleSelectOption(option)"
+            @click.stop="handleSelectOption(option)"
             :class="optionClass"
           >
             <div class="select-vb-option">
