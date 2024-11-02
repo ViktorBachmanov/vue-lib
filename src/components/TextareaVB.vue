@@ -8,7 +8,7 @@ defineProps({
     type: String,
     default: '',
   },
-  placeholderCss: {
+  placeholderCSS: {
     type: Object,
     default: {
       fontSize: '16px',
@@ -78,8 +78,8 @@ textarea {
 }
 
 textarea::placeholder {
-  font-size: v-bind('placeholderCss.fontSize');
-  color: v-bind('placeholderCss.color');
+  font-size: v-bind('placeholderCSS.fontSize');
+  color: v-bind('placeholderCSS.color');
 }
 
 .error {
