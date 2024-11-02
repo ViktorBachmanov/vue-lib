@@ -310,11 +310,15 @@ function handleClick(event) {
             :class="optionClass"
           >
             <div class="select-vb-option">
+              <div style="margin-left: .25em">
+                <slot name="prefixOptionIcon" :isSelected="isSelected(option)"></slot>
+              </div>
+
               {{ option[labelKey] || option }}
-              <span 
-                v-if="multiple && isSelected(option)"
-                class="select-vb-check-mark"
-              >&check;</span>
+        
+              <div style="margin-left: auto; margin-right: .25em">
+                <slot name="postfixOptionIcon" :isSelected="isSelected(option)"></slot>
+              </div>
             </div>
           </li>
         </ul>
@@ -436,7 +440,7 @@ li {
 
 .select-vb-option {
   display: flex;
-  justify-content: space-between;
+  /* gap: 6px; */
 }
 
 /* .select-vb-postfix-icon {

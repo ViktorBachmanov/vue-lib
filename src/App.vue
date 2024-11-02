@@ -7,6 +7,7 @@ import InputVB from './components/InputVB.vue'
 import TextareaVB from './components/TextareaVB.vue'
 import SelectVB from './components/SelectVB.vue'
 import IconX from './components/icon/IconX.vue';
+import IconMinus from './components/icon/IconMinus.vue';
 
 
 const checked_1 = ref(false)
@@ -174,7 +175,7 @@ const selectValArr = ref([])
       <legend class="text-black dark:text-white">Array</legend>
       <SelectVB
         class="my-10 dark:text-white"
-        selectClass="!w-[600px] border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px] dark:!bg-slate-800"
+        selectClass="!w-[400px] border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px] dark:!bg-slate-800"
         :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
         v-model:value="selectValArr"
         label="Multiple"
@@ -192,6 +193,15 @@ const selectValArr = ref([])
 
         <template #prefixChipIcon>
           <IconX class="text-white"/>
+        </template>
+
+        <template #prefixOptionIcon="{ isSelected }">
+          <IconMinus class="text-gray-500 mr-1.5" v-if="isSelected"/>
+          <IconX class="rotate-45 text-gray-500 mr-2" v-else/>
+        </template>
+
+        <template #postfixOptionIcon="{ isSelected }">
+          <IconX class="rotate-45 text-gray-500" v-if="isSelected"/>
         </template>
       </SelectVB>
 
