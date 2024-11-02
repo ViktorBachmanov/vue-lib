@@ -88,7 +88,7 @@ const selectValArr = ref([])
       <SelectVB
         class="my-10 dark:text-white"
         selectClass="border border-1 border-black dark:border-white rounded-lg"
-        :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
+        :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
         v-model:value="selectValObj"
       />
 
@@ -174,13 +174,16 @@ const selectValArr = ref([])
       <legend class="text-black dark:text-white">Array</legend>
       <SelectVB
         class="my-10 dark:text-white"
-        selectClass="border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px]"
-        :options="[{ label: 'White', id: 1 }, { label: 'Black', id: 2 }]"
+        selectClass="!w-[600px] border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px] dark:!bg-slate-800"
+        :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
         v-model:value="selectValArr"
+        label="Multiple"
         multiple
         chips
         chip-class="!text-[15.31px] !text-white !p-[7px] !pr-[9px] !rounded-[15px] bg-[#95C11F] !max-h-[30px] !gap-[4px] !border-0"
         chips-class="!gap-[10px]"
+        optionsClass="whitespace-nowrap !rounded-[20px]"
+        options-placement="under"
       >
         <template #prefixChipIcon>
           <IconX class="text-white"/>

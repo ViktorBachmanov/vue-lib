@@ -52,6 +52,12 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  optionsPlacement: {
+    validator(value, props) {
+      return ['offset', 'under'].includes(value)
+    },
+    default: 'offset'
+  },
   optionClass: {
     type: String,
     default: ''
@@ -179,12 +185,27 @@ function setOptionsOffset() {
   const selectElHeight = selectEl.value.getBoundingClientRect().height
   const gap = 5;
 
+  let offset, padding
+
+  switch (props.optionsPlacement) {
+    case 'offset':
+      offset = selectElHeight + gap + 'px'
+      padding = null
+      break;
+    case 'under':
+      offset = 0
+      padding = selectElHeight + gap + 'px'
+      break;
+  }
+
   if (optionsEl.value) {
     const bottomEdgeCoord = optionsEl.value.getBoundingClientRect().bottom;
     if(bottomEdgeCoord > document.documentElement.clientHeight) {
-      optionsEl.value.style.bottom = selectElHeight + gap + 'px';
+      optionsEl.value.style.bottom = offset;
+      optionsEl.value.style.paddingBottom = padding;
     } else {      
-      optionsEl.value.style.top = selectElHeight + gap + 'px'
+      optionsEl.value.style.top = offset
+      optionsEl.value.style.paddingTop = padding;
     }
   }
 }
@@ -225,51 +246,53 @@ function handleClick(event) {
       {{ label }}
     </div>
 
-    <div
-      ref="selectEl"
-      class="select-vb-el"
-      :class="[selectClass, { 'select-vb-error-border': error }]"
-      @click="handleClick"
-    >
+    <div class="relative">
       <div
-        v-if="isNoneSelected"
-        :class="placeholderClass"
-        class="select-vb-placeholder"
-      >
-        {{ placeholder }}
-      </div>
-
-      <div
-        v-else-if="chips"
-        class="select-vb-chips"
-        :class="chipsClass"
+        ref="selectEl"
+        class="select-vb-el !z-[75]"
+        :class="[selectClass, { 'select-vb-error-border': error }]"
+        @click="handleClick"
       >
         <div
-          v-for="item in items"
-          class="select-vb-chip"
-          :class="chipClass"
+          v-if="isNoneSelected"
+          :class="placeholderClass"
+          class="select-vb-placeholder"
         >
-          <div @click.stop="handleSelectOption(item)">
-            <slot name="prefixChipIcon"></slot>
-          </div>
-          {{ item[labelKey] }}
-          <slot name="postfixChipIcon"></slot>
+          {{ placeholder }}
         </div>
-      </div>
 
-      <div
-        v-else="val"
-      >
-        {{ items }}
-      </div>
+        <div
+          v-else-if="chips"
+          class="select-vb-chips"
+          :class="chipsClass"
+        >
+          <div
+            v-for="item in items"
+            class="select-vb-chip"
+            :class="chipClass"
+          >
+            <div @click.stop="handleSelectOption(item)">
+              <slot name="prefixChipIcon"></slot>
+            </div>
+            {{ item[labelKey] }}
+            <slot name="postfixChipIcon"></slot>
+          </div>
+        </div>
 
-      <slot name="postfixIcon"></slot>
+        <div
+          v-else="val"
+        >
+          {{ items }}
+        </div>
+
+        <slot name="postfixIcon"></slot>
+      </div>
 
       <Transition
       >
         <ul
           ref="optionsEl"
-          class="select-vb-options"
+          class="select-vb-options !z-[54]"
           :class="optionsClass"
           v-if="isOpen"
         >
@@ -351,7 +374,6 @@ function handleClick(event) {
 
 .select-vb-options {
   position: absolute;
-  /* top: 3em; */
   left: 0;
   border-radius: .5em;
   max-height: 380px;
@@ -359,7 +381,6 @@ function handleClick(event) {
   border-style: solid;
   border-width: 1px;
   border-color: rgb(27, 26, 26);
-  background-color: white;
 
   .dark & {
     border-color: rgb(224, 214, 214);
