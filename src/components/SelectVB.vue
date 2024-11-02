@@ -48,6 +48,10 @@ const props = defineProps({
     type: String,
     default: 'Select',
   },
+  optionClass: {
+    type: String,
+    default: ''
+  },
   optionsClass: {
     type: String,
     default: ''
@@ -57,10 +61,6 @@ const props = defineProps({
       return ['offset', 'under'].includes(value)
     },
     default: 'offset'
-  },
-  optionClass: {
-    type: String,
-    default: ''
   },
   placeholderClass: {
     type: String,
@@ -310,7 +310,7 @@ function handleClick(event) {
             :class="optionClass"
           >
             <div class="select-vb-option">
-              <div style="margin-left: .25em">
+              <div style="margin-left: .25em" class="select-vb-option-prefix-icon">
                 <slot name="prefixOptionIcon" :isSelected="isSelected(option)"></slot>
               </div>
 
@@ -440,7 +440,6 @@ li {
 
 .select-vb-option {
   display: flex;
-  /* gap: 6px; */
 }
 
 /* .select-vb-postfix-icon {

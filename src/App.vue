@@ -183,6 +183,7 @@ const selectValArr = ref([])
         chips
         chip-class="!text-[15.31px] !text-white !p-[7px] !pr-[9px] !rounded-[15px] bg-[#95C11F] !max-h-[30px] !gap-[4px] !border-0"
         chips-class="!gap-[10px]"
+        optionClass="group text-gray-400 hover:!text-white hover:bg-green-400"
         optionsClass="whitespace-nowrap !rounded-[20px]"
         options-placement="under"
         :z-index="55"
@@ -196,8 +197,8 @@ const selectValArr = ref([])
         </template>
 
         <template #prefixOptionIcon="{ isSelected }">
-          <IconMinus class="text-gray-500 mr-1.5" v-if="isSelected"/>
-          <IconX class="rotate-45 text-gray-500 mr-2" v-else/>
+          <IconMinus class="mr-1.5" v-if="isSelected"/>
+          <IconX class="rotate-45 mr-2 text-gray-400 group-hover:!text-white" v-else/>
         </template>
 
         <template #postfixOptionIcon="{ isSelected }">
