@@ -175,7 +175,7 @@ const selectValArr = ref([])
       <legend class="text-black dark:text-white">Array</legend>
       <SelectVB
         class="my-10 dark:text-white"
-        selectClass="!w-[400px] border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px] dark:!bg-slate-800"
+        selectClass="!w-[400px] border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px] bg-white dark:!bg-slate-800"
         :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
         v-model:value="selectValArr"
         label="Multiple"
@@ -184,7 +184,7 @@ const selectValArr = ref([])
         chip-class="!text-[15.31px] !text-white !p-[7px] !pr-[9px] !rounded-[15px] bg-[#95C11F] !max-h-[30px] !gap-[4px] !border-0"
         chips-class="!gap-[10px]"
         optionClass="group text-gray-400 hover:!text-white hover:bg-green-400"
-        optionsClass="whitespace-nowrap !rounded-[20px]"
+        optionsClass="whitespace-nowrap !rounded-[20px] !border-[#D0D3D5] bg-white"
         options-placement="under"
         :z-index="55"
       >
