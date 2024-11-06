@@ -21,6 +21,10 @@ defineProps({
   },
   labelClass: String,
   errorClass: String,
+  errorColor: {
+    type: String,
+    default: '#EF4444',
+  },
   textareaClass: String,
 })
 
@@ -47,7 +51,7 @@ watch(val, () => {
       :id="id"
       :class="textareaClass"
       v-model="val"
-      :style="{ borderColor: error ? 'red' : null }"
+      :style="{ borderColor: error ? errorColor : null }"
       :placeholder="placeholder"
     ></textarea>
 
@@ -64,7 +68,6 @@ watch(val, () => {
 <style scoped>
 .outer {
   width: fit-content;
-  /* border: 1px solid blue; */
 }
 
 label {
@@ -84,10 +87,8 @@ textarea::placeholder {
 
 .error {
   min-height: 1.5em;
-  /* margin-top: 4px; */
   margin-left: 1em;
   font-size: 14px;
-  /* line-height: 20px; */
-  color: red;
+  color: v-bind('errorColor');
 }
 </style>

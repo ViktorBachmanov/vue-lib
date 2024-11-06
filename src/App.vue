@@ -32,11 +32,13 @@ const textareaValue = ref('')
 const textareaError = ref('')
 
 const textareaClass = computed(() => {
-  let taClass = 'rounded-[20px] p-4 resize-none dark:text-gray-300 border '
+  let taClass = 'rounded-[20px] p-4 resize-none dark:text-gray-300 border border-slate-800 dark:border-slate-300'
 
-  return textareaError.value
-    ? taClass + '!border-red-700 dark:!border-red-500'
-    : taClass + '!border-slate-800 dark:!border-slate-300'
+  return taClass
+
+  // return textareaError.value
+  //   ? taClass + '!border-red-700 dark:!border-red-500'
+  //   : taClass + '!border-slate-800 dark:!border-slate-300'
 })
 
 function handleSubmit() {
@@ -155,6 +157,7 @@ const selectValArr = ref([])
       :textareaClass="textareaClass"
       placeholder="Опишите подробно"
       :placeholderCSS="{ fontSize: '16px', color: 'blue' }"
+      errorColor="red"
     />
 
     <pre 
