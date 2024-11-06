@@ -62,6 +62,10 @@ const props = defineProps({
     },
     default: 'offset'
   },
+  offset: {
+    type: Number,
+    default: 5,
+  },
   placeholderClass: {
     type: String,
     default: ''
@@ -183,29 +187,31 @@ function setOptionsWidth() {
 
 function setOptionsOffset() {
   const selectElHeight = selectEl.value.getBoundingClientRect().height
-  const gap = 5;
 
   let offset, padding
 
   switch (props.optionsPlacement) {
     case 'offset':
-      offset = selectElHeight + gap + 'px'
+      offset = selectElHeight + props.offset
       padding = null
       break;
     case 'under':
       offset = 0
-      padding = selectElHeight + gap + 'px'
+      padding = selectElHeight
       break;
   }
 
   if (optionsEl.value) {
     const bottomEdgeCoord = optionsEl.value.getBoundingClientRect().bottom;
+    const compStyles = window.getComputedStyle(optionsEl.value)
     if(bottomEdgeCoord > document.documentElement.clientHeight) {
-      optionsEl.value.style.bottom = offset;
-      optionsEl.value.style.paddingBottom = padding;
+      optionsEl.value.style.bottom = offset + 'px'
+      const compPaddingBottom = parseInt(compStyles.getPropertyValue('padding-bottom'))
+      optionsEl.value.style.paddingBottom = compPaddingBottom + padding + 'px'
     } else {      
-      optionsEl.value.style.top = offset
-      optionsEl.value.style.paddingTop = padding;
+      optionsEl.value.style.top = offset + 'px'
+      const compPaddingTop = parseInt(compStyles.getPropertyValue('padding-top'))
+      optionsEl.value.style.paddingTop = compPaddingTop + padding + 'px'
     }
   }
 }

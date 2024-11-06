@@ -52,7 +52,7 @@ const selectValArr = ref([])
 </script>
 
 <template>
-  <div style="display: flex; flex-direction: column;">
+  <div style="display: flex; flex-direction: column; margin-bottom: 100px">
     <button 
       @click="handleToggleTheme"
     >Toggle theme</button>
@@ -189,8 +189,9 @@ const selectValArr = ref([])
         chip-class="!text-[15.31px] !text-white !p-[7px] !pr-[9px] !rounded-[15px] bg-[#95C11F] !max-h-[30px] !gap-[4px] !border-0"
         chips-class="!gap-[10px]"
         optionClass="group text-gray-400 hover:!text-white hover:bg-green-400"
-        optionsClass="whitespace-nowrap !rounded-[20px] !border-[#D0D3D5] bg-white"
+        optionsClass="whitespace-nowrap !rounded-[20px] !border-[#D0D3D5] bg-white py-2"
         options-placement="under"
+        :offset="10"
         :z-index="55"
       >
         <template #prefixIcon>
