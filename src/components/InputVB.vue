@@ -1,11 +1,15 @@
 <script setup>
-import { watch } from 'vue';
+import { watch, computed, nextTick } from 'vue';
 
 
 const props = defineProps({
   type: {
     type: String,
     default: 'text',
+  },
+  integer: {
+    type: Boolean,
+    default: false,
   },
   placeholder: {
     type: String,
@@ -43,7 +47,7 @@ const props = defineProps({
   readonly: {
     type: Boolean,
     default: false,
-  }
+  },
 })
 
 const val = defineModel('value')
@@ -53,6 +57,21 @@ watch(val, () => {
   error.value = ''
 })
 
+const cVal = computed({
+  get() {
+    return val.value
+  },
+  async set(newVal) {
+    if (props.integer && /[^0-9]/.test(newVal)) {
+      const temp = val.value
+      val.value = ' '
+      await nextTick()
+      val.value = temp
+      return
+    }
+    val.value = newVal
+  }
+})
 </script>
 
 
@@ -77,7 +96,7 @@ watch(val, () => {
         :id="id"
         :type="type"
         :placeholder="placeholder"
-        v-model="val"
+        v-model="cVal"
         :class="inputClass"
         :readonly="readonly"
       >

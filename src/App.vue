@@ -22,6 +22,9 @@ function handleToggleTheme() {
 const val = ref('someVal')
 const error = ref('')
 
+const intVal = ref(1)
+const intValError = ref('')
+
 watch(errorOn, (newVal) => {
   error.value = newVal
     ? 'Введены некорректные данные'
@@ -143,6 +146,19 @@ const selectValArr = ref([])
       v-model:error="error"
       id="emailInputId"
       label="Email"
+    />
+
+    <InputVB 
+      wrapperClass="!border-gray-400 dark:!border-blue-400"
+      colorLight="#6F46C4"
+      colorDark="#6F46C4"
+      type="text"
+      placeholder="Введите целое число"
+      v-model:value="intVal"
+      v-model:error="intValError"
+      id="integerInputId"
+      label="Целое число"
+      integer
     />
     
     <div style="border: 1px solid magenta; min-height: 2em"></div>
