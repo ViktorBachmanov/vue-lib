@@ -134,6 +134,7 @@ const selectValArr = ref([])
       class="!text-blue-700 dark:!text-rose-700"
       id="ErrorOnCheckboxVB"
       postfixLabel="Error On / Off"
+      bgColorChecked="magenta"
     />
 
     <InputVB 

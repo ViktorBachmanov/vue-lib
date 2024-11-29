@@ -23,6 +23,10 @@ const props = defineProps({
   prefixLabel: String,
   postfixLabel: String,
   id: String, 
+  bgColorChecked: {
+    type: String,
+    default: 'blue',
+  }
 })
 const checked = defineModel()
 
@@ -70,7 +74,7 @@ function handleClick() {
           :class="borderClass"
           stroke="currentColor"
           :stroke-width="borderWidth"
-          :fill="checked ? 'black' : 'none'" 
+          :fill="checked ? bgColorChecked : 'none'" 
         />
 
         <path 
