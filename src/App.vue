@@ -93,9 +93,11 @@ const selectValArr = ref([])
       <legend class="text-black dark:text-white">Object</legend>
       <SelectVB
         class="my-10 dark:text-white"
-        selectClass="border border-1 border-black dark:border-white rounded-lg"
+        selectClass="border border-1 border-black dark:border-white rounded-lg !max-w-[100px]"
         :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
         v-model:value="selectValObj"
+        options-in-center
+        option-class="!min-w-[500px]"
       />
 
       <pre class="mb-10 dark:text-white">{{ selectValObj }}</pre>

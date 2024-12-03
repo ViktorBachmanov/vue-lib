@@ -62,6 +62,10 @@ const props = defineProps({
     },
     default: 'offset'
   },
+  optionsInCenter: {
+    type: Boolean,
+    default: false,
+  },
   offset: {
     type: Number,
     default: 5,
@@ -179,14 +183,15 @@ watch(isOpen, async (newVal) => {
 })
 
 function setOptionsWidth() {
-  if (optionsEl.value) {
+  if (optionsEl.value && !props.optionsInCenter) {
     const width = selectEl.value.getBoundingClientRect().width
     optionsEl.value.style.width = width + 'px'
   }
 }
 
 function setOptionsOffset() {
-  const selectElHeight = selectEl.value.getBoundingClientRect().height
+  const selectElRect = selectEl.value.getBoundingClientRect()
+  const selectElHeight = selectElRect.height
 
   let offset, padding
 
@@ -202,7 +207,8 @@ function setOptionsOffset() {
   }
 
   if (optionsEl.value) {
-    const bottomEdgeCoord = optionsEl.value.getBoundingClientRect().bottom;
+    const optionsElRect = optionsEl.value.getBoundingClientRect();
+    const bottomEdgeCoord = optionsElRect.bottom;
     const compStyles = window.getComputedStyle(optionsEl.value)
     if(bottomEdgeCoord > document.documentElement.clientHeight) {
       optionsEl.value.style.bottom = offset + 'px'
@@ -212,6 +218,12 @@ function setOptionsOffset() {
       optionsEl.value.style.top = offset + 'px'
       const compPaddingTop = parseInt(compStyles.getPropertyValue('padding-top'))
       optionsEl.value.style.paddingTop = compPaddingTop + padding + 'px'
+    }
+
+    if (props.optionsInCenter) {
+      const diff = selectElRect.width - optionsElRect.width
+      console.log('diff: ', diff)
+      optionsEl.value.style.left = diff / 2 + 'px'
     }
   }
 }
