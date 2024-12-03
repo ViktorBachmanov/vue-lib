@@ -314,7 +314,7 @@ function handleClick(event) {
           {{ items }}
         </div>
 
-        <div style="margin-left: auto">
+        <div>
           <slot name="postfixIcon"></slot>
         </div>
       </div>
@@ -395,6 +395,7 @@ function handleClick(event) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 1em;
   z-index: v-bind('zIndex + 1');
 }
