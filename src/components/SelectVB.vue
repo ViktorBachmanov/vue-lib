@@ -122,6 +122,8 @@ const items = computed(() => {
 })
 
 function handleSelectOption(option) {
+  // console.log('handleSelectOption')
+
   if (props.multiple) {
     const index = val.value.findIndex(item => item[props.valueKey] === option[props.valueKey])
     if (index === -1) {
@@ -162,12 +164,19 @@ async function open() {
   isOpen.value = true
   // await nextTick()
   // optionsEl.value.style.width = width + 'px'
-  addEventListener('click', handleClick)
+  const event = new Event('closePrevSelectVB')
+
+  window.dispatchEvent(event)
+
+  addEventListener('closePrevSelectVB', close)
+  addEventListener('click', close)
 }
 
 function close() {
+  // console.log('close()')
   isOpen.value = false
-  removeEventListener('click', handleClick)
+  removeEventListener('closePrevSelectVB', close)
+  removeEventListener('click', close)
 }
 
 onUpdated(() => {  
@@ -222,25 +231,21 @@ function setOptionsOffset() {
 
     if (props.optionsInCenter) {
       const diff = selectElRect.width - optionsElRect.width
-      console.log('diff: ', diff)
+      // console.log('diff: ', diff)
       optionsEl.value.style.left = diff / 2 + 'px'
     }
   }
 }
 
 function handleClick(event) {
-  if (event.target === optionsEl.value || event.target.closest('.select-vb-options')) {
-    // console.log('click on options')
-    event.stopPropagation()
-    return
-  }
+  // console.log('handleClick target: ', event.target)
   
   if (event.target === selectEl.value || event.target.closest('.select-vb-el')) {
     // console.log('click on select element')
-    if (!isOpen.value) {
-      open()
-    } else {
+    if (isOpen.value) {
       close()
+    } else {
+      open()
     }
     event.stopPropagation()
     return
@@ -248,9 +253,9 @@ function handleClick(event) {
 
   // console.log('click outside')
 
-  if (isOpen.value) {
-    close()
-  }
+  // if (isOpen.value) {
+  //   close()
+  // }
 }
 </script>
 
