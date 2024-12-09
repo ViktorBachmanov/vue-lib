@@ -3,9 +3,13 @@ import { ref, computed } from 'vue'
 
 const props = defineProps({
   prefix: String,
+  initialVal: {
+    type: Number,
+    default: 1,
+  }
 })
 
-const val = ref(1)
+const val = ref(props.initialVal)
 const valRef = ref(null)
 
 const cVal = computed({
