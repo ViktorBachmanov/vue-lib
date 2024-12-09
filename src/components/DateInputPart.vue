@@ -3,13 +3,14 @@ import { ref, computed } from 'vue'
 
 const props = defineProps({
   prefix: String,
-  initialVal: {
-    type: Number,
-    default: 1,
-  }
+  // initialVal: {
+  //   type: Number,
+  //   default: 1,
+  // }
 })
 
-const val = ref(props.initialVal)
+// const val = ref(props.initialVal)
+const val = defineModel()
 const valRef = ref(null)
 
 const cVal = computed({
