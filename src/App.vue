@@ -62,7 +62,8 @@ const selectValArr = ref([])
     >Toggle theme</button>
 
     <DateInputVB
-      class="m-10 dark:text-gray-300" 
+      class="m-10 dark:text-gray-300 w-[380px] h-[60px]
+        rounded-[20px] border border-[#D0D3D5] text-[26px]" 
     />
 
     <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
