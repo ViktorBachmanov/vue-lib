@@ -31,6 +31,7 @@ function handleFocus() {
   window.dispatchEvent(event)
   addEventListener('focusDateInputVBPart', handleBlur)
   addEventListener('keydown', handleKeydown)
+  addEventListener('click', handleBlur, true)
 
   focused.value = true
 }
@@ -39,10 +40,13 @@ function handleBlur() {
   focused.value = false
   removeEventListener('focusDateInputVBPart', handleBlur)
   removeEventListener('keydown', handleKeydown)
+  removeEventListener('click', handleBlur)
+
   digitStrokesCount.value = 0
 }
 
 function handleKeydown(e) {
+  console.log('e.key: ', e.key)
   if (e.key >= '0' && e.key <= '9') { 
     switch (digitStrokesCount.value++) {
       case 0:
@@ -55,8 +59,42 @@ function handleKeydown(e) {
         handleBlur()
         break
     }
+  } else {
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'Enter':
+        handleRight()
+        break
+      case 'ArrowLeft':
+        handleLeft()
+        break
+      case 'Delete':
+      case 'Backspace':
+        handleDelete()
+        break
+    }
   }
 }
+
+const emit = defineEmits(['right', 'left'])
+
+function handleRight() {
+  handleBlur()
+  emit('right')
+}
+
+function handleLeft() {
+  handleBlur()
+  emit('left')
+}
+
+function handleDelete() {
+  // val.value = ''
+}
+
+defineExpose({
+  handleFocus,
+})
 </script>
 
 <template>

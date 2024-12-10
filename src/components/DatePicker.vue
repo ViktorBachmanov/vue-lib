@@ -12,38 +12,43 @@ console.log('date: ', date.value)
 // const year = defineModel('year')
 
 const num = computed(() => date.value.getDate())
-const day = computed(() => date.value.getDay())
+// const day = computed(() => date.value.getDay())
 const month = computed(() => date.value.getMonth())
 const year = computed(() => date.value.getFullYear())
 
-const firstDay = computed(() => day.value - num.value % 7 + 1)
+// const firstDay = computed(() => day.value - num.value % 7 + 1)
+const firstDay = computed(() => {
+  let day = (new Date(`${year.value}-${month.value + 1}-1`)).getDay()
+  if (day == 0) {
+    day = 7
+  }
+  return day
+})
+
+console.log('firstDay: ', firstDay.value)
 
 const weeks = computed(() => {
   const totalDays = daysInMonth(month.value, year.value)
-  const weeks = []
-  // for (let i = 0; i <= daysInMonth; i += 7) {
-  //   weeks.push()
-  // }
   console.log('totalDays: ', totalDays)
-  const totalWeeks = Math.ceil(totalDays / 7)
-  console.log('totalWeeks: ', totalWeeks)
 
-  let currentNum = firstDay.value + 2
+  const weeks = []
+  
+  const totalWeeks = Math.ceil(totalDays / 7)
+  // console.log('totalWeeks: ', totalWeeks)
+
+  let currentNum = 1
   console.log('currentNum: ', currentNum)
 
-  for (let w = 0; w < totalWeeks; w++) {
+  // for (let w = 0; w < totalWeeks; w++) {
+  for (let w = 0; currentNum < totalDays && w < 7; w++) {
     weeks[w] = []
     for (let d = 0; d < 7; d++) {
-      // if (startDay > (w + 1) * (d + 1)) {
-      //   weeks[w].push('')
-      //   continue
-      // }
-      if (w * 7 + d < (totalDays - 1) && currentNum > 0) {
-        weeks[w][d] = currentNum
+      const currentDay = w * 7 + d + 1
+      if (currentDay < firstDay.value  || currentNum > totalDays) {
+        weeks[w][d] = ''        
       } else {
-        weeks[w][d] = ''
+        weeks[w][d] = currentNum++
       }
-      currentNum++
     }
     // console.log('startDay: ', startDay)
   }
@@ -53,6 +58,14 @@ const weeks = computed(() => {
 
 function daysInMonth(month, year) {
   return new Date(year, month + 1, 0).getDate();
+}
+
+function handleSelect(num) {
+  if (!num) {
+    return
+  }
+
+  date.value = new Date(`${year.value}-${month.value + 1}-${num}`)
 }
 </script>
 
@@ -77,15 +90,15 @@ function daysInMonth(month, year) {
         >
           <td
             v-for="d in week"
-            :class="{ selected: d == num }"
+            :class="{ selectable: d, selected: d == num }"
+            @click="handleSelect(d)"
           >
-            {{ d }}
+            <span>{{ d }}</span>
           </td>
 
         </tr>
       </tbody>
     </table>
-    {{ firstDay }}
   </div>
 </template>
 
@@ -99,9 +112,15 @@ td {
   text-align: right;
 }
 
-:nth-child(6), :nth-child(7) {
+th:nth-child(6), th:nth-child(7),
+td:nth-child(6), td:nth-child(7) {
   background-color: rgb(98, 18, 68);
+  color: white;
 } 
+
+.selectable {
+  cursor: pointer;
+}
 
 .selected {
   box-shadow: inset 0 0 2px 3px #95C11F;
