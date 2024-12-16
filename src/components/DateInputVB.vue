@@ -9,6 +9,10 @@ const props = defineProps({
   pickerIconSize: {
     type: Number,
     default: 24,
+  },
+  pickerZIndex: {
+    type: Number,
+    default: 55,
   }
 })
 
@@ -122,6 +126,7 @@ function handleOpenPicker() {
     <DatePicker 
       v-if="pickerIsOpen"
       v-model="date"
+      :z-index="pickerZIndex"
     />
   </div>
 </template>
@@ -133,5 +138,6 @@ function handleOpenPicker() {
   justify-content: space-between;
   padding-left: 0.5em;
   padding-right: 0.5em;
+  position: relative;
 }
 </style>

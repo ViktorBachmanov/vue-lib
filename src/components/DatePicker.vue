@@ -1,6 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+
+const props = defineProps({
+  zIndex: {
+    type: Number,
+    default: 55,
+  }
+})
+
 const date = defineModel()
 
 console.log('date: ', date.value)
@@ -70,8 +78,8 @@ function handleSelect(num) {
 </script>
 
 <template>
-  <div>
-    <table>
+  <div class="date-input-vb-calendar">
+    <table class="date-input-vb-calendar-table">
       <thead>
         <tr>
           <th>Пн</th>
@@ -124,5 +132,17 @@ td:nth-child(6), td:nth-child(7) {
 
 .selected {
   box-shadow: inset 0 0 2px 3px #95C11F;
+}
+
+.date-input-vb-calendar {
+  z-index: v-bind('zIndex');
+  background-color: white;
+  position: absolute;
+  top: 3em;
+  left: 0;
+}
+
+.dark .date-input-vb-calendar {
+  background-color: black;
 }
 </style>
