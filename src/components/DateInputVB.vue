@@ -21,14 +21,27 @@ const date = ref(new Date)
 const num = computed({
   get: () => date.value.getDate(),
   set(newVal) {
-    date.value = new Date(`${year.value}-${month.value + 1}-${newVal}`)
+    const newDate = new Date(`${year.value}-${month.value + 1}-${newVal}`)
+    // console.log('newDate: ', newDate)
+    // console.log('isValidDate: ', isValidDate(newDate))
+    if (isValidDate(newDate)) {
+      date.value = newDate
+    }
   }
 })
+
+function isValidDate(d) {
+  return d instanceof Date && !isNaN(d);
+}
+
 // const day = ref(date.value.getDay())
 const month = computed({
   get: () => date.value.getMonth(),
   set(newVal) {
-    date.value = new Date(`${year.value}-${newVal + 1}-${num.value}`)
+    const newDate = new Date(`${year.value}-${newVal + 1}-${num.value}`)
+    if (isValidDate(newDate)) {
+      date.value = newDate
+    }
   }
 })
 const year = computed({
