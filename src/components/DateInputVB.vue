@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, nextTick } from 'vue'
 
 import DateInputPart from './DateInputPart.vue';
 import DatePicker from './DatePicker.vue';
@@ -83,15 +83,18 @@ function handleFocus(partRef) {
 
 const pickerIsOpen = ref(false)
 
-function handleTogglePicker() {
+async function handleTogglePicker() {
   if (pickerIsOpen.value) {
+    pickerIsOpen.value = false
     window.removeEventListener('click', closePicker)
     window.removeEventListener('keyup', escape)
   } else {
+    pickerIsOpen.value = true
+    await nextTick()
+    placePicker()
     window.addEventListener('click', closePicker)
     window.addEventListener('keyup', escape)
   }
-  pickerIsOpen.value = !pickerIsOpen.value
 }
 
 function closePicker() {
@@ -103,10 +106,26 @@ function escape(e) {
     closePicker()
   }
 }
+
+const outerRef = ref(null)
+const pickerRef = ref(null)
+
+function placePicker() {
+  const outerRect = outerRef.value.getBoundingClientRect()
+  // const pickerRect = pickerRef.value.outerRef.getBoundingClientRect()
+  const pickerRect = pickerRef.value.outerRect
+
+  const widthDiff = outerRect.width - pickerRect.width
+  // pickerRef.value.outerRef.style.left = widthDiff / 2 + 'px'
+  pickerRef.value.setStyle('left', widthDiff / 2 + 'px')
+}
 </script>
 
 <template>
-  <div class="outer">
+  <div 
+    class="outer"
+    ref="outerRef"
+  >
     <div>
       <DateInputPart 
         :ref="partsRefs.num"
@@ -146,6 +165,7 @@ function escape(e) {
         v-model="date"
         :z-index="pickerZIndex"
         @click.stop
+        ref="pickerRef"
       />
     </Transition>
   </div>

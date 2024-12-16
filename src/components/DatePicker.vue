@@ -75,10 +75,24 @@ function handleSelect(num) {
 
   date.value = new Date(`${year.value}-${month.value + 1}-${num}`)
 }
+
+const outerRef = ref(null)
+
+const outerRect = computed(() => outerRef.value.getBoundingClientRect())
+
+defineExpose({
+  // outerRef,
+  outerRect,
+  setStyle,
+})
+
+function setStyle(prop, val) {
+  outerRef.value.style[prop] = val
+}
 </script>
 
 <template>
-  <div class="date-input-vb-calendar">
+  <div class="date-input-vb-calendar" ref="outerRef">
     <table class="date-input-vb-calendar-table">
       <thead>
         <tr>
