@@ -67,6 +67,7 @@ const date = ref(new Date)
       class="m-10 dark:text-gray-300 w-[380px] h-[60px]
         rounded-[20px] border border-[#D0D3D5] text-[26px] !z-[155]" 
       v-model:date="date"
+      focusedBgColor="magenta"
     />
 
     <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">

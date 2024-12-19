@@ -3,10 +3,10 @@ import { ref, computed } from 'vue'
 
 const props = defineProps({
   prefix: String,
-  // initialVal: {
-  //   type: Number,
-  //   default: 1,
-  // }
+  focusedBgColor: {
+    type: String,
+    default: '#95C11F'
+  }
 })
 
 // const val = ref(props.initialVal)
@@ -114,6 +114,6 @@ defineExpose({
 
 <style scoped>
 .focused {
-  background-color: #95C11F;
+  background-color: v-bind('focusedBgColor');
 }
 </style>

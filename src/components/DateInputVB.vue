@@ -17,6 +17,10 @@ const props = defineProps({
   pickerZIndex: {
     type: Number,
     default: 55,
+  },
+  focusedBgColor: {
+    type: String,
+    default: '#95C11F'
   }
 })
 
@@ -149,17 +153,20 @@ function placePicker() {
         v-model="cNum"
         @right="handleFocus(partsRefs.month)"
         @done="handleFocus(partsRefs.month)"
+        :focusedBgColor="focusedBgColor"
       />.<DateInputPart 
         :ref="partsRefs.month"
         v-model="cMonth"
         @right="handleFocus(partsRefs.year)"
         @done="handleFocus(partsRefs.year)"
         @left="handleFocus(partsRefs.num)"
+        :focusedBgColor="focusedBgColor"
       />.<DateInputPart 
         :ref="partsRefs.year"
         prefix="20" 
         v-model="cYear"
         @left="handleFocus(partsRefs.month)"
+        :focusedBgColor="focusedBgColor"
       />
     </div>
 
