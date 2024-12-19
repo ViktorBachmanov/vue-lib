@@ -46,7 +46,7 @@ function handleBlur() {
 }
 
 function handleKeydown(e) {
-  console.log('e.key: ', e.key)
+  // console.log('e.key: ', e.key)
   if (e.key >= '0' && e.key <= '9') { 
     switch (digitStrokesCount.value++) {
       case 0:
@@ -54,6 +54,7 @@ function handleKeydown(e) {
         break
       case 1:
         val.value += e.key
+        done()
         break
       default:
         handleBlur()
@@ -76,7 +77,7 @@ function handleKeydown(e) {
   }
 }
 
-const emit = defineEmits(['right', 'left'])
+const emit = defineEmits(['right', 'left', 'done'])
 
 function handleRight() {
   handleBlur()
@@ -90,6 +91,11 @@ function handleLeft() {
 
 function handleDelete() {
   // val.value = ''
+}
+
+function done() {
+  handleBlur()
+  emit('done')
 }
 
 defineExpose({

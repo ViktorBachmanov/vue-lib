@@ -6,6 +6,10 @@ import DatePicker from './DatePicker.vue';
 
 
 const props = defineProps({
+  picker: {
+    type: Boolean,
+    default: false,
+  },
   pickerIconSize: {
     type: Number,
     default: 24,
@@ -16,7 +20,7 @@ const props = defineProps({
   }
 })
 
-const date = ref(new Date)
+const date = defineModel('date')
 
 const num = computed({
   get: () => date.value.getDate(),
@@ -144,10 +148,12 @@ function placePicker() {
         :ref="partsRefs.num"
         v-model="cNum"
         @right="handleFocus(partsRefs.month)"
+        @done="handleFocus(partsRefs.month)"
       />.<DateInputPart 
         :ref="partsRefs.month"
         v-model="cMonth"
         @right="handleFocus(partsRefs.year)"
+        @done="handleFocus(partsRefs.year)"
         @left="handleFocus(partsRefs.num)"
       />.<DateInputPart 
         :ref="partsRefs.year"
@@ -157,7 +163,7 @@ function placePicker() {
       />
     </div>
 
-    <slot name="calendar-icon">
+    <slot name="calendar-icon" v-if="picker">
       <svg xmlns="http://www.w3.org/2000/svg" 
         :width="pickerIconSize" 
         :height="pickerIconSize" 
