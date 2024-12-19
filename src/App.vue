@@ -8,6 +8,7 @@ import TextareaVB from './components/TextareaVB.vue'
 import SelectVB from './components/SelectVB.vue'
 import IconX from './components/icon/IconX.vue';
 import IconMinus from './components/icon/IconMinus.vue';
+import DateInputVB from './components/DateInputVB.vue'
 
 
 const checked_1 = ref(false)
@@ -52,6 +53,8 @@ const selectValStr = ref('')
 const selectErrorStr = ref('выберите')
 const selectValObj = ref({})
 const selectValArr = ref([])
+
+const date = ref(new Date)
 </script>
 
 <template>
@@ -59,6 +62,12 @@ const selectValArr = ref([])
     <button 
       @click="handleToggleTheme"
     >Toggle theme</button>
+
+    <DateInputVB
+      class="m-10 dark:text-gray-300 w-[380px] h-[60px]
+        rounded-[20px] border border-[#D0D3D5] text-[26px] !z-[155]" 
+      v-model:date="date"
+    />
 
     <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
       <legend class="text-black dark:text-white">String</legend>
