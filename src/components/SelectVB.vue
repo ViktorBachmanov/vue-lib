@@ -92,6 +92,14 @@ const props = defineProps({
   zIndex: {
     type: Number,
     default: 55,
+  },
+  sticky: {
+    type: Boolean,
+    default: false,
+  },
+  stickySelectedOptionBgColor: {
+    type: String,
+    default: 'gray',
   }
 })
 
@@ -131,6 +139,19 @@ function handleSelectOption(option) {
     } else {
       val.value.splice(index, 1)
     }    
+  } else if (props.sticky) {
+    if (typeof val.value === 'string' || val.value instanceof String) {
+      if (val.value == option) {
+        val.value = ''
+      } else {
+        val.value = option
+      }   
+    } else if (props.sticky && val.value[props.valueKey] == option[props.valueKey]) {
+      val.value = {}
+    } else {
+      val.value = option
+    }    
+    close()
   } else {
     val.value = option
     close()
@@ -330,7 +351,7 @@ function handleClick(event) {
           <li
             v-for="option in options"
             @click.stop="handleSelectOption(option)"
-            :class="optionClass"
+            :class="[optionClass, {'selected': (sticky && isSelected(option))} ]"
           >
             <div class="select-vb-option">
               <div style="margin-left: .25em" class="select-vb-option-prefix-icon">
@@ -435,6 +456,10 @@ li {
 
   .dark &:hover {
     background-color: rgb(33, 71, 62);
+  }
+
+  &.selected {
+    background-color: v-bind('stickySelectedOptionBgColor');
   }
 }
 

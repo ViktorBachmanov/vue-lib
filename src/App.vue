@@ -50,7 +50,7 @@ function handleSubmit() {
 }
 
 const selectValStr = ref('')
-const selectErrorStr = ref('выберите')
+const selectErrorStr = ref('')
 const selectValObj = ref({})
 const selectValArr = ref([])
 
@@ -81,6 +81,8 @@ const date = ref(new Date)
         label="String select"
         :error-space="true"
         v-model:error="selectErrorStr"
+        sticky
+        stickySelectedOptionBgColor="#a3d6d0"
       >
         <template #postfixIcon>
           <svg 
@@ -108,6 +110,7 @@ const date = ref(new Date)
         v-model:value="selectValObj"
         options-in-center
         option-class="!min-w-[500px]"
+        sticky
       />
 
       <pre class="mb-10 dark:text-white">{{ selectValObj }}</pre>
