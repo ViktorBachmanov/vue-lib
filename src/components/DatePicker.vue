@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useDate } from '../composables/useDate.js'
+import IconChevronDeg from './icon/IconChevronDeg.vue'
 
 
 const props = defineProps({
@@ -13,16 +15,49 @@ const date = defineModel()
 
 console.log('date: ', date.value)
 
+// console.log('date.toLocaleDateString: ', date.value.toLocaleDateString('ru-RU'))
+
 
 // const num = defineModel('num')
 // const day = defineModel('day')
 // const month = defineModel('month')
 // const year = defineModel('year')
 
-const num = computed(() => date.value.getDate())
+const { num } = useDate(date)
+
 // const day = computed(() => date.value.getDay())
-const month = computed(() => date.value.getMonth())
+// const month = computed(() => date.value.getMonth())
+const month = computed({
+  get: () => date.value.getMonth(),
+  set: (newVal) => {
+    const newDate = new Date(`${year.value}-${newVal + 1}-${num.value}`)
+    if (isValidDate(newDate)) {
+      date.value = newDate
+    }
+  } 
+})
+function isValidDate(d) {
+  return d instanceof Date && !isNaN(d);
+}
+
 const year = computed(() => date.value.getFullYear())
+
+const monthName = computed(() => {
+  switch (month.value) {
+    case 0: return 'Январь'
+    case 1: return 'Февраль'
+    case 2: return 'Март'
+    case 3: return 'Апрель'
+    case 4: return 'Май'
+    case 5: return 'Июнь'
+    case 6: return 'Июль'
+    case 7: return 'Август'
+    case 8: return 'Сентябрь'
+    case 9: return 'Октябрь'
+    case 10: return 'Ноябрь'
+    case 11: return 'Декабрь'
+  }
+})
 
 // const firstDay = computed(() => day.value - num.value % 7 + 1)
 const firstDay = computed(() => {
@@ -89,10 +124,32 @@ defineExpose({
 function setStyle(prop, val) {
   outerRef.value.style[prop] = val
 }
+
+function handlePrevMonth() {
+  month.value--
+}
+
+function handleNextMonth() {
+  month.value++
+}
 </script>
 
 <template>
   <div class="date-input-vb-calendar" ref="outerRef">
+    <div class="date-input-vb-calendar-month">
+      <IconChevronDeg
+        :angle="180"
+        @click="handlePrevMonth"
+      />
+
+      {{ monthName }}
+
+      <IconChevronDeg
+        @click="handleNextMonth"
+      />
+    </div>
+    <div>{{ year }}</div>
+
     <table class="date-input-vb-calendar-table">
       <thead>
         <tr>
@@ -154,9 +211,26 @@ td:nth-child(6), td:nth-child(7) {
   position: absolute;
   top: 3em;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 0.33em; */
 }
 
 .dark .date-input-vb-calendar {
   background-color: black;
+}
+
+.date-input-vb-calendar-table {
+  margin-top: 0.33em;
+}
+
+.date-input-vb-calendar-month {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 0.33em;
+  padding-left: 0.33em;
 }
 </style>

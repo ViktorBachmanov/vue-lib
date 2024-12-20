@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, watchEffect, nextTick } from 'vue'
+import { useDate } from '../composables/useDate.js'
 
 import DateInputPart from './DateInputPart.vue';
 import DatePicker from './DatePicker.vue';
@@ -26,21 +27,7 @@ const props = defineProps({
 
 const date = defineModel('date')
 
-const num = computed({
-  get: () => date.value.getDate(),
-  set(newVal) {
-    const newDate = new Date(`${year.value}-${month.value + 1}-${newVal}`)
-    // console.log('newDate: ', newDate)
-    // console.log('isValidDate: ', isValidDate(newDate))
-    if (isValidDate(newDate)) {
-      date.value = newDate
-    }
-  }
-})
-
-function isValidDate(d) {
-  return d instanceof Date && !isNaN(d);
-}
+const { num } = useDate(date)
 
 // const day = ref(date.value.getDay())
 const month = computed({
