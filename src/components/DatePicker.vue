@@ -19,32 +19,7 @@ const date = defineModel()
 
 console.log('date: ', date.value)
 
-// console.log('date.toLocaleDateString: ', date.value.toLocaleDateString('ru-RU'))
-
-
-// const num = defineModel('num')
-// const day = defineModel('day')
-// const month = defineModel('month')
-// const year = defineModel('year')
-
-const { num } = useDate(date)
-
-// const day = computed(() => date.value.getDay())
-// const month = computed(() => date.value.getMonth())
-const month = computed({
-  get: () => date.value.getMonth(),
-  set: (newVal) => {
-    const newDate = new Date(`${year.value}-${newVal + 1}-${num.value}`)
-    if (isValidDate(newDate)) {
-      date.value = newDate
-    }
-  } 
-})
-function isValidDate(d) {
-  return d instanceof Date && !isNaN(d);
-}
-
-const year = computed(() => date.value.getFullYear())
+const { year, month, num } = useDate(date)
 
 const monthName = computed(() => {
   switch (month.value) {
