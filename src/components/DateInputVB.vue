@@ -27,24 +27,9 @@ const props = defineProps({
 
 const date = defineModel('date')
 
-const { num } = useDate(date)
+const { year, month, num } = useDate(date)
 
-// const day = ref(date.value.getDay())
-const month = computed({
-  get: () => date.value.getMonth(),
-  set(newVal) {
-    const newDate = new Date(`${year.value}-${newVal + 1}-${num.value}`)
-    if (isValidDate(newDate)) {
-      date.value = newDate
-    }
-  }
-})
-const year = computed({
-  get: () => date.value.getFullYear(),
-  set(newVal) {
-    date.value = new Date(`${newVal}-${month.value + 1}-${num.value}`)
-  }
-})
+// const day = ref(date.value.getDay()
 
 watchEffect(() => {
   date.value = new Date(`${year.value}-${month.value + 1}-${num.value}`)

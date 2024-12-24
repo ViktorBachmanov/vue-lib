@@ -196,6 +196,10 @@ th, td {
   padding: 0.25em;
 }
 
+th {
+  font-weight: 500;
+}
+
 td {
   text-align: right;
 }
@@ -211,7 +215,8 @@ td:nth-child(6), td:nth-child(7) {
 }
 
 .selected {
-  box-shadow: inset 0 0 2px 3px #95C11F;
+  box-shadow: inset 0 0 0 4px #c11fc1a4;
+  border-radius: 10px;
 }
 
 .date-input-vb-calendar {

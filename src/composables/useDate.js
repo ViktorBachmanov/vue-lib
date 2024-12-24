@@ -1,6 +1,23 @@
 import { computed, } from 'vue'
 
 export function useDate(date) {
+  const year = computed({
+    get: () => date.value.getFullYear(),
+    set(newVal) {
+      date.value = new Date(`${newVal}-${month.value + 1}-${num.value}`)
+    }
+  })
+
+  const month = computed({
+    get: () => date.value.getMonth(),
+    set(newVal) {
+      const newDate = new Date(`${year.value}-${newVal + 1}-${num.value}`)
+      if (isValidDate(newDate)) {
+        date.value = newDate
+      }
+    }
+  })
+
   const num = computed({
     get: () => date.value.getDate(),
     set(newVal) {
@@ -12,8 +29,11 @@ export function useDate(date) {
       }
     }
   })
+ 
 
   return {
+    year,
+    month,
     num,
   }
 }
