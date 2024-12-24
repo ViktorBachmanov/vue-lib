@@ -8,6 +8,10 @@ const props = defineProps({
   zIndex: {
     type: Number,
     default: 55,
+  },
+  weekendBg: {
+    type: String,
+    default: 'rgb(253 164 175 / 0.6'
   }
 })
 
@@ -182,9 +186,14 @@ function handleNextMonth() {
 </template>
 
 <style scoped>
+table {
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
 th, td {
-  border: 0.5px solid;
-  padding: 0.25em
+  /* border: 5px solid transparent; */
+  padding: 0.25em;
 }
 
 td {
@@ -193,8 +202,8 @@ td {
 
 th:nth-child(6), th:nth-child(7),
 td:nth-child(6), td:nth-child(7) {
-  background-color: rgb(98, 18, 68);
-  color: white;
+  background-color: v-bind('weekendBg');
+  /* color: white; */
 } 
 
 .selectable {
