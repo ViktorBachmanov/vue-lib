@@ -55,14 +55,11 @@ const weeks = computed(() => {
 
   const weeks = []
   
-  const totalWeeks = Math.ceil(totalDays / 7)
-  // console.log('totalWeeks: ', totalWeeks)
-
   let currentNum = 1
   console.log('currentNum: ', currentNum)
 
   // for (let w = 0; w < totalWeeks; w++) {
-  for (let w = 0; currentNum < totalDays && w < 7; w++) {
+  for (let w = 0; currentNum <= totalDays && w < 7; w++) {
     weeks[w] = []
     for (let d = 0; d < 7; d++) {
       const currentDay = w * 7 + d + 1

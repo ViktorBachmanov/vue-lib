@@ -1,4 +1,4 @@
-import { computed, } from 'vue'
+import { computed } from 'vue'
 
 export function useDate(date) {
   const year = computed({
@@ -10,7 +10,16 @@ export function useDate(date) {
 
   const month = computed({
     get: () => date.value.getMonth(),
-    set(newVal) {
+    set: async (newVal) => {
+      if (newVal > 11) {
+        year.value++
+        await new Promise(resolve => setTimeout(resolve, 0))
+        newVal %= 12
+      } else if (newVal < 0) {
+        year.value--
+        await new Promise(resolve => setTimeout(resolve, 0))
+        newVal += 12
+      } 
       const newDate = new Date(`${year.value}-${newVal + 1}-${num.value}`)
       if (isValidDate(newDate)) {
         date.value = newDate
