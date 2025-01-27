@@ -181,6 +181,15 @@ const date = ref(new Date)
     <div style="border: 1px solid magenta; min-height: 2em"></div>
     <!-- </label> -->
 
+    <DateInputVB
+      class="m-10 dark:text-gray-300 w-[380px] h-[60px]
+        rounded-[20px] border border-[#D0D3D5] text-[26px] !z-[155]" 
+      v-model:date="date"
+      picker
+      focused-bg-color="rgb(167 243 208 / 0.6)"
+      :picker-z-index="175"
+    />
+
     <TextareaVB
       id="textAreaId"
       label="Textarea"
@@ -208,6 +217,15 @@ const date = ref(new Date)
     <textarea>
       kjsdnksjn skjnckj
     </textarea>
+
+    <DateInputVB
+      class="m-10 dark:text-gray-300 w-[380px] h-[60px]
+        rounded-[20px] border border-[#D0D3D5] text-[26px] !z-[155]" 
+      v-model:date="date"
+      picker
+      focused-bg-color="rgb(167 243 208 / 0.6)"
+      :picker-z-index="125"
+    />
 
     <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
       <legend class="text-black dark:text-white">Array</legend>
@@ -248,6 +266,11 @@ const date = ref(new Date)
 
       <!-- <pre class="mb-10 dark:text-white">{{ selectValArr }}</pre> -->
     </fieldset>
+
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
 
   

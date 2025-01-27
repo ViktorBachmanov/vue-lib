@@ -111,6 +111,14 @@ function placePicker() {
   const widthDiff = outerRect.width - pickerRect.width
   // pickerRef.value.outerRef.style.left = widthDiff / 2 + 'px'
   pickerRef.value.setStyle('left', widthDiff / 2 + 'px')
+
+  pickerRef.value.setStyle('top', outerRect.height + 10 + 'px')
+
+  const bottomEdgeCoord = pickerRect.bottom;
+    if(bottomEdgeCoord > document.documentElement.clientHeight / 7 * 5) {
+      pickerRef.value.setStyle('top', null)
+      pickerRef.value.setStyle('bottom', outerRect.height + 10 + 'px')
+    }
 }
 </script>
 

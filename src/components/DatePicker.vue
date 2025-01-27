@@ -17,7 +17,7 @@ const props = defineProps({
 
 const date = defineModel()
 
-console.log('date: ', date.value)
+// console.log('date: ', date.value)
 
 const { year, month, num } = useDate(date)
 
@@ -47,16 +47,16 @@ const firstDay = computed(() => {
   return day
 })
 
-console.log('firstDay: ', firstDay.value)
+// console.log('firstDay: ', firstDay.value)
 
 const weeks = computed(() => {
   const totalDays = daysInMonth(month.value, year.value)
-  console.log('totalDays: ', totalDays)
+  // console.log('totalDays: ', totalDays)
 
   const weeks = []
   
   let currentNum = 1
-  console.log('currentNum: ', currentNum)
+  // console.log('currentNum: ', currentNum)
 
   // for (let w = 0; w < totalWeeks; w++) {
   for (let w = 0; currentNum <= totalDays && w < 7; w++) {
@@ -211,7 +211,7 @@ td:nth-child(6), td:nth-child(7) {
   z-index: v-bind('zIndex');
   background-color: white;
   position: absolute;
-  top: 3em;
+  /* top: 3em; */
   left: 0;
   display: flex;
   flex-direction: column;
