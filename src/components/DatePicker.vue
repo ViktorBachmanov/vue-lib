@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { useDate } from '../composables/useDate.js'
 import IconChevronDeg from './icon/IconChevronDeg.vue'
 
@@ -101,11 +101,27 @@ function setStyle(prop, val) {
   outerRef.value.style[prop] = val
 }
 
-function handlePrevMonth() {
+async function handlePrevMonth() {
+  const currentNum = num.value
+  const totalDaysInMonth = daysInMonth(month.value - 1, year.value)
+  if (totalDaysInMonth < currentNum) {
+    num.value = totalDaysInMonth
+  }
+
+  await new Promise(resolve => setTimeout(resolve))
+
   month.value--
 }
 
-function handleNextMonth() {
+async function handleNextMonth() {
+  const currentNum = num.value
+  const totalDaysInMonth = daysInMonth(month.value + 1, year.value)
+  if (totalDaysInMonth < currentNum) {
+    num.value = totalDaysInMonth
+  }
+
+  await new Promise(resolve => setTimeout(resolve))
+
   month.value++
 }
 </script>
