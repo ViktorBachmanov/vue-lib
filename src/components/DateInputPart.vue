@@ -50,6 +50,10 @@ function handleKeydown(e) {
   if (e.key >= '0' && e.key <= '9') { 
     switch (digitStrokesCount.value++) {
       case 0:
+        if (e.key == '0') {
+          digitStrokesCount.value--
+          break
+        }
         val.value = e.key
         break
       case 1:
