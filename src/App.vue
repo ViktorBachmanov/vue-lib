@@ -69,6 +69,7 @@ const date = ref(new Date)
       v-model:date="date"
       picker
       focused-bg-color="rgb(167 243 208 / 0.6)"
+      picker-css="shadow-xl text-xl border border-stone-500 rounded-lg"
     />
 
     <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">

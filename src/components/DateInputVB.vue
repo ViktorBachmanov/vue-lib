@@ -22,6 +22,10 @@ const props = defineProps({
   focusedBgColor: {
     type: String,
     default: '#95C11F'
+  },
+  pickerCss: {
+    type: String,
+    default: '',
   }
 })
 
@@ -172,6 +176,7 @@ function placePicker() {
         :z-index="pickerZIndex"
         @click.stop
         ref="pickerRef"
+        :client-css="pickerCss"
       />
     </Transition>
   </div>

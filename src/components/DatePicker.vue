@@ -12,6 +12,10 @@ const props = defineProps({
   weekendBg: {
     type: String,
     default: 'rgb(253 164 175 / 0.6'
+  },
+  clientCss: {
+    type: String,
+    default: '',
   }
 })
 
@@ -127,7 +131,11 @@ async function handleNextMonth() {
 </script>
 
 <template>
-  <div class="date-input-vb-calendar" ref="outerRef">
+  <div 
+    class="date-input-vb-calendar"
+    :class="clientCss" 
+    ref="outerRef"
+  >
     <div class="date-input-vb-calendar-month">
       <IconChevronDeg
         :angle="180"
@@ -211,7 +219,6 @@ td:nth-child(6), td:nth-child(7) {
   z-index: v-bind('zIndex');
   background-color: white;
   position: absolute;
-  /* top: 3em; */
   left: 0;
   display: flex;
   flex-direction: column;
