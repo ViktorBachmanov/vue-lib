@@ -13,7 +13,7 @@ const props = defineProps({
     type: String,
     default: 'rgb(253 164 175 / 0.6'
   },
-  clientCss: {
+  clientCSS: {
     type: String,
     default: '',
   }
@@ -133,7 +133,7 @@ async function handleNextMonth() {
 <template>
   <div 
     class="date-input-vb-calendar"
-    :class="clientCss" 
+    :class="clientCSS" 
     ref="outerRef"
   >
     <div class="date-input-vb-calendar-month">

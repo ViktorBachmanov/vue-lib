@@ -23,7 +23,7 @@ const props = defineProps({
     type: String,
     default: '#95C11F'
   },
-  pickerCss: {
+  pickerCSS: {
     type: String,
     default: '',
   }
@@ -176,7 +176,7 @@ function placePicker() {
         :z-index="pickerZIndex"
         @click.stop
         ref="pickerRef"
-        :client-css="pickerCss"
+        :clientCSS="pickerCSS"
       />
     </Transition>
   </div>
