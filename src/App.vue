@@ -232,7 +232,8 @@ const date = ref(new Date)
       <legend class="text-black dark:text-white">Array</legend>
       <SelectVB
         class="my-10 dark:text-white"
-        selectClass="!w-[400px] border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px] bg-white dark:!bg-slate-800"
+        selectClass="!w-[400px] border border-1 border-[#D0D3D5] dark:border-white rounded-[20px] !min-h-[60px] 
+          bg-white dark:!bg-slate-800 !flex-nowrap"
         :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
         v-model:value="selectValArr"
         label="Multiple"
@@ -247,7 +248,7 @@ const date = ref(new Date)
         :z-index="55"
       >
         <template #prefixIcon>
-          <IconX class="rotate-45 ml-2"/>
+          <IconX class="rotate-45 ml-2 shrink-0"/>
         </template>
 
         <template #prefixChipIcon>
@@ -266,6 +267,21 @@ const date = ref(new Date)
 
 
       <!-- <pre class="mb-10 dark:text-white">{{ selectValArr }}</pre> -->
+    </fieldset>
+
+    <fieldset class="border border-black dark:border-white p-5 rounded-lg m-10">
+      <legend class="text-black dark:text-white">Object</legend>
+      <SelectVB
+        class="my-10 dark:text-white"
+        selectClass="border border-1 border-black dark:border-white rounded-lg !max-w-[100px]"
+        :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
+        v-model:value="selectValObj"
+        options-in-center
+        option-class="!min-w-[500px]"
+        sticky
+      />
+
+      <pre class="mb-10 dark:text-white">{{ selectValObj }}</pre>
     </fieldset>
 
     <br>

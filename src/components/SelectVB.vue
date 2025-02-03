@@ -202,11 +202,17 @@ function close() {
 
 onUpdated(() => {  
   setOptionsWidth()
+  setOptionsOffset()
 })
+
+let optionsElComputedStyles, optionsElCompPaddingTop, optionsElCompPaddingBottom
 
 watch(isOpen, async (newVal) => {
   if (newVal) {
     await nextTick()
+    optionsElComputedStyles = window.getComputedStyle(optionsEl.value)
+    optionsElCompPaddingTop = parseInt(optionsElComputedStyles.getPropertyValue('padding-top'))
+    optionsElCompPaddingBottom = parseInt(optionsElComputedStyles.getPropertyValue('padding-bottom'))
     setOptionsWidth()
     setOptionsOffset()
   }
@@ -237,17 +243,22 @@ function setOptionsOffset() {
   }
 
   if (optionsEl.value) {
+    optionsEl.value.style.top = offset + 'px'
+    optionsEl.value.style.bottom = null
+    optionsEl.value.style.paddingTop = null
+    optionsEl.value.style.paddingBottom = null
+
     const optionsElRect = optionsEl.value.getBoundingClientRect();
     const bottomEdgeCoord = optionsElRect.bottom;
-    const compStyles = window.getComputedStyle(optionsEl.value)
+    console.log('bottomEdgeCoord: ', bottomEdgeCoord)
+    console.log('document.documentElement.clientHeight: ', document.documentElement.clientHeight)
     if(bottomEdgeCoord > document.documentElement.clientHeight) {
+      optionsEl.value.style.top = null
       optionsEl.value.style.bottom = offset + 'px'
-      const compPaddingBottom = parseInt(compStyles.getPropertyValue('padding-bottom'))
-      optionsEl.value.style.paddingBottom = compPaddingBottom + padding + 'px'
+      optionsEl.value.style.paddingBottom = optionsElCompPaddingBottom + padding + 'px'
     } else {      
       optionsEl.value.style.top = offset + 'px'
-      const compPaddingTop = parseInt(compStyles.getPropertyValue('padding-top'))
-      optionsEl.value.style.paddingTop = compPaddingTop + padding + 'px'
+      optionsEl.value.style.paddingTop = optionsElCompPaddingTop + padding + 'px'
     }
 
     if (props.optionsInCenter) {
