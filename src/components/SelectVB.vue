@@ -250,8 +250,6 @@ function setOptionsOffset() {
 
     const optionsElRect = optionsEl.value.getBoundingClientRect();
     const bottomEdgeCoord = optionsElRect.bottom;
-    console.log('bottomEdgeCoord: ', bottomEdgeCoord)
-    console.log('document.documentElement.clientHeight: ', document.documentElement.clientHeight)
     if(bottomEdgeCoord > document.documentElement.clientHeight) {
       optionsEl.value.style.top = null
       optionsEl.value.style.bottom = offset + 'px'
