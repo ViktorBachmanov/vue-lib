@@ -180,24 +180,26 @@ const isNoneSelected = computed(() => {
   }
 })
 
-async function open() {
-  // const width = selectEl.value.getBoundingClientRect().width
+const vClickOutside = {
+  mounted: (el) => {
+    el.__ClickOutsideHandler__ = (event) => {
+      if (!(el === event.target || el.contains(event.target)) && isOpen.value) {
+          close()
+      }
+    }
+    document.body.addEventListener('click', el.__ClickOutsideHandler__)
+  },
+  unmounted: (el) => {
+    document.body.removeEventListener('click', el.__ClickOutsideHandler__)
+  }
+}
+
+function open() {
   isOpen.value = true
-  // await nextTick()
-  // optionsEl.value.style.width = width + 'px'
-  const event = new Event('closePrevSelectVB')
-
-  window.dispatchEvent(event)
-
-  addEventListener('closePrevSelectVB', close)
-  addEventListener('click', close)
 }
 
 function close() {
-  // console.log('close()')
   isOpen.value = false
-  removeEventListener('closePrevSelectVB', close)
-  removeEventListener('click', close)
 }
 
 onUpdated(() => {  
@@ -270,14 +272,14 @@ function setOptionsOffset() {
 function handleClick(event) {
   // console.log('handleClick target: ', event.target)
   
-  if (event.target === selectEl.value || event.target.closest('.select-vb-el')) {
+  if (selectEl.value === event.target  || selectEl.value.contains(event.target)) {
     // console.log('click on select element')
     if (isOpen.value) {
       close()
     } else {
       open()
     }
-    event.stopPropagation()
+    // event.stopPropagation()
     return
   }
 
@@ -305,6 +307,7 @@ function handleClick(event) {
         class="select-vb-el"
         :class="[selectClass, { 'select-vb-error-border': error }]"
         @click="handleClick"
+        v-click-outside
       >
         <slot name="prefixIcon"></slot>
 
@@ -344,7 +347,7 @@ function handleClick(event) {
           {{ items }}
         </div>
 
-        <div>
+        <div class="select-vb-postfix-icon">
           <slot name="postfixIcon"></slot>
         </div>
       </div>
@@ -425,7 +428,7 @@ function handleClick(event) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 1em;
   z-index: v-bind('zIndex + 1');
 }
@@ -500,14 +503,9 @@ li {
   display: flex;
 }
 
-/* .select-vb-postfix-icon {
-  width: 16px;
-  color: rgb(43, 40, 40);
-
-  .dark & {
-    color: rgb(207, 190, 190);
-  }
-} */
+.select-vb-postfix-icon {
+  margin-left: auto;
+}
 
 .v-enter-active,
 .v-leave-active {
