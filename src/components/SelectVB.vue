@@ -336,7 +336,7 @@ function handleClick(event) {
             {{ item[labelKey] }}
 
             <div @click.stop="handleSelectOption(item)">
-              <slot name="postfixChipIcon"></slot>
+              <slot name="postfixChipIcon" :item="item"></slot>
             </div>
           </div>
         </div>
