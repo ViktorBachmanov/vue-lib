@@ -363,7 +363,7 @@ function handleClick(event) {
           <li
             v-for="option in options"
             @click.stop="handleSelectOption(option)"
-            :class="[optionClass, {'selected': (sticky && isSelected(option))} ]"
+            :class="[optionClass, {'selected': (sticky && isSelected(option))}, {'disabled': option.disabled}]"
           >
             <div class="select-vb-option">
               <div style="margin-left: .25em" class="select-vb-option-prefix-icon">
@@ -505,6 +505,12 @@ li {
 
 .select-vb-postfix-icon {
   margin-left: auto;
+}
+
+.disabled {
+  cursor: auto;
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .v-enter-active,

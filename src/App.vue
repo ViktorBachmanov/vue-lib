@@ -112,7 +112,7 @@ function handleClickScopedSlot(item) {
       <SelectVB
         class="my-10 dark:text-white"
         selectClass="border border-1 border-black dark:border-white rounded-lg !max-w-[100px]"
-        :options="[{ label: 'Плазменная резка', id: 1 }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
+        :options="[{ label: 'Плазменная резка', id: 1, disabled: true }, { label: 'Лазерная резка', id: 2 }, { label: 'Раскрой материала', id: 3 }]"
         v-model:value="selectValObj"
         options-in-center
         option-class="!min-w-[500px]"
