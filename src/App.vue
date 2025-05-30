@@ -16,6 +16,9 @@ const checked_2 = ref(false)
 const checked_3 = ref(false)
 const errorOn = ref(false)
 
+const checkbox_1_error = ref('Подтвердите согласие')
+const checkbox_2_error = ref('Подтвердите согласие')
+
 function handleToggleTheme() {
   document.documentElement.classList.toggle('dark')
 }
@@ -125,15 +128,20 @@ function handleClickScopedSlot(item) {
     
 
     <CheckboxVB 
-      v-model="checked_1"
+      v-model:checked="checked_1"
+      v-model:error="checkbox_1_error"
+      error-space
       prefixLabel="CheckboxVB-1"
       class="text-sm"
       borderClass="dark:text-gray-500"
       labelClass="dark:text-gray-500"
+      id="CheckboxVB-1"
     />
     
     <CheckboxVB 
-      v-model="checked_2"
+      v-model:checked="checked_2"
+      v-model:error="checkbox_2_error"
+      error-space
       postfixLabel="CheckboxVB-2"
       class="!text-blue-700 dark:!text-rose-700"
       id="CheckboxVB-2"
@@ -145,13 +153,13 @@ function handleClickScopedSlot(item) {
 
     <!-- <label> -->
     <CheckboxVB 
-      v-model="checked_3"
+      v-model:checked="checked_3"
       postfixLabel="CheckboxVB-3"
       id="CheckboxVB-3"
     />
 
     <CheckboxVB 
-      v-model="errorOn"
+      v-model:checked="errorOn"
       class="!text-blue-700 dark:!text-rose-700"
       id="ErrorOnCheckboxVB"
       postfixLabel="Error On / Off"

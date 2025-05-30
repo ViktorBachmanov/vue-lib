@@ -1,4 +1,6 @@
 <script setup>
+import { watch, } from 'vue';
+
 const props = defineProps({
   size: {
     type: Number,
@@ -26,9 +28,23 @@ const props = defineProps({
   bgColorChecked: {
     type: String,
     default: 'blue',
-  }
+  },
+  errorSpace: {
+    type: Boolean,
+    default: false
+  },
+  errorColor: {
+    type: String,
+    default: '#EF4444',
+  },
 })
-const checked = defineModel()
+
+const checked = defineModel('checked')
+const error = defineModel('error')
+
+watch(checked, () => {
+  error.value = ''
+})
 
 function handleClick() {
   document.getElementById(props.id).click()
@@ -37,71 +53,80 @@ function handleClick() {
 
 
 <template>
-  <div class="outer">
-    <label 
-      :for="id"
-      v-if="prefixLabel"
-      :class="labelClass"
-    >
-      {{ prefixLabel }}
-    </label>
-
-    <div
-      class="icon"
-      :style="{ minHeight: size + 'px', maxHeight: size + 'px', minWidth: size + 'px', maxWidth: size + 'px',  }"
-      @click="handleClick"
-    >
-      <input 
-        type="checkbox" 
-        style="opacity: 0;"
-        v-model="checked"
-        :id="id"
+  <div>
+    <div class="checkbox-vb-body">
+      <label 
+        :for="id"
+        v-if="prefixLabel"
+        :class="labelClass"
       >
+        {{ prefixLabel }}
+      </label>
 
-      <svg 
-        :width="size" 
-        :height="size"
-        :viewBox="`0 0 ${size} ${size}`" 
-        xmlns="http://www.w3.org/2000/svg"
-        style="position: absolute; top: 0; left: 0"
+      <div
+        class="icon"
+        :style="{ minHeight: size + 'px', maxHeight: size + 'px', minWidth: size + 'px', maxWidth: size + 'px',  }"
+        @click="handleClick"
       >
-        <rect
-          :x="borderWidth / 2"
-          :y="borderWidth / 2"
-          :width="size - borderWidth" 
-          :height="size - borderWidth"
-          rx="2"
-          :class="borderClass"
-          stroke="currentColor"
-          :stroke-width="borderWidth"
-          :fill="checked ? bgColorChecked : 'none'" 
-        />
+        <input 
+          type="checkbox" 
+          style="opacity: 0;"
+          v-model="checked"
+          :id="id"
+        >
 
-        <path 
-          v-if="checked"
-          :d="`M${0.25 * size},${0.5 * size} L${0.4 * size},${0.65 * size} L${0.8 * size},${0.3 * size}` " 
-          fill="none"
-          stroke="white"
-          :stroke-width="markWidth"
-          stroke-linecap="round"  
-          stroke-linejoin="round"        
-        />
-      </svg>
+        <svg 
+          :width="size" 
+          :height="size"
+          :viewBox="`0 0 ${size} ${size}`" 
+          xmlns="http://www.w3.org/2000/svg"
+          style="position: absolute; top: 0; left: 0"
+        >
+          <rect
+            :x="borderWidth / 2"
+            :y="borderWidth / 2"
+            :width="size - borderWidth" 
+            :height="size - borderWidth"
+            rx="2"
+            :class="borderClass"
+            stroke="currentColor"
+            :stroke-width="borderWidth"
+            :fill="checked ? bgColorChecked : 'none'" 
+          />
+
+          <path 
+            v-if="checked"
+            :d="`M${0.25 * size},${0.5 * size} L${0.4 * size},${0.65 * size} L${0.8 * size},${0.3 * size}` " 
+            fill="none"
+            stroke="white"
+            :stroke-width="markWidth"
+            stroke-linecap="round"  
+            stroke-linejoin="round"        
+          />
+        </svg>
+      </div>
+
+      <label 
+        :for="id"
+        v-if="postfixLabel"
+        :class="labelClass"
+      >
+        {{ postfixLabel }}
+      </label>
     </div>
 
-    <label 
-      :for="id"
-      v-if="postfixLabel"
-      :class="labelClass"
+    <div 
+      v-if="errorSpace" 
+      class="error"
     >
-      {{ postfixLabel }}
-    </label>
+      {{ error }}
+    </div>
   </div>
 </template>
 
 
 <style scoped>
-.outer {
+.checkbox-vb-body {
   display: flex;
   align-items: center;
   gap: 0.4em;
@@ -118,5 +143,12 @@ function handleClick() {
 
 label {
   cursor: pointer;
+}
+
+.error {
+  min-height: 1.5em;
+  font-size: 14px;
+  line-height: 20px;
+  color: v-bind('errorColor');
 }
 </style>
