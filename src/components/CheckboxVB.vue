@@ -147,6 +147,8 @@ label {
 
 .error {
   min-height: 1.5em;
+  margin-top: 2px;
+  margin-left: 0.5em;
   font-size: 14px;
   line-height: 20px;
   color: v-bind('errorColor');
