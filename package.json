@@ -1,7 +1,7 @@
 {
   "name": "@vbachm/vue-lib",
   "private": false,
-  "version": "0.0.61",
+  "version": "0.0.62",
   "type": "module",
   "files": [
     "dist"
@@ -13,7 +13,10 @@
       "import": "./dist/vue-lib.js",
       "require": "./dist/vue-lib.umd.cjs"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
   },
   "exclude": [
     "src/App.vue",
