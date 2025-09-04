@@ -221,6 +221,9 @@ watch(isOpen, async (newVal) => {
 })
 
 function setOptionsWidth() {
+  if (!selectEl.value) {
+    return
+  }
   if (optionsEl.value && !props.optionsInCenter) {
     const width = selectEl.value.getBoundingClientRect().width
     optionsEl.value.style.width = width + 'px'
@@ -228,6 +231,9 @@ function setOptionsWidth() {
 }
 
 function setOptionsOffset() {
+  if (!selectEl.value) {
+    return
+  }
   const selectElRect = selectEl.value.getBoundingClientRect()
   const selectElHeight = selectElRect.height
 
