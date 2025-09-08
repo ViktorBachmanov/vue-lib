@@ -136,6 +136,7 @@ function handleClickScopedSlot(item) {
       borderClass="dark:text-gray-500"
       labelClass="dark:text-gray-500"
       id="CheckboxVB-1"
+      aria-label="agreed"
     />
     
     <CheckboxVB 

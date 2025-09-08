@@ -37,6 +37,7 @@ const props = defineProps({
     type: String,
     default: '#EF4444',
   },
+  ariaLabel: String,
 })
 
 const checked = defineModel('checked')
@@ -73,6 +74,7 @@ function handleClick() {
           style="opacity: 0;"
           v-model="checked"
           :id="id"
+          :aria-label="ariaLabel"
         >
 
         <svg 
