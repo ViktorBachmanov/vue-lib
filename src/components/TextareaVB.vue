@@ -25,6 +25,10 @@ defineProps({
     type: String,
     default: '#EF4444',
   },
+  focusBorderColor: {
+    type: String,
+    default: '#42b983',
+  },
   textareaClass: String,
 })
 
@@ -83,6 +87,10 @@ textarea {
 textarea::placeholder {
   font-size: v-bind('placeholderCSS.fontSize');
   color: v-bind('placeholderCSS.color');
+}
+
+textarea:focus {
+  border-color: v-bind('focusBorderColor');
 }
 
 .error {

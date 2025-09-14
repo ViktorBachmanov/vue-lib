@@ -1,5 +1,5 @@
 <script setup>
-import { watch, computed, nextTick } from 'vue';
+import { watch, computed, nextTick, ref } from 'vue';
 
 
 const props = defineProps({
@@ -39,6 +39,10 @@ const props = defineProps({
     type: String,
     default: '#EF4444',
   },
+  focusBorderColor: {
+    type: String,
+    default: '#42b983',
+  },
   wrapperClass: String,
   inputClass: String,
   id: String,
@@ -72,6 +76,14 @@ const cVal = computed({
     val.value = newVal
   }
 })
+
+const focus = ref(false)
+
+const borderColor = computed(() => {
+  if (error.value) return props.errorColor
+  if (focus.value) return props.focusBorderColor
+  return ''
+})
 </script>
 
 
@@ -88,7 +100,7 @@ const cVal = computed({
     <div 
       class="input-vb-wrapper"
       :class="wrapperClass"
-      :style="{ borderColor: error ? `${errorColor} !important` : null }"
+      :style="{ borderColor: `${borderColor} !important`}"
     >
       <slot name="prefixIcon"></slot>
 
@@ -99,6 +111,8 @@ const cVal = computed({
         v-model="cVal"
         :class="inputClass"
         :readonly="readonly"
+        @focus="focus = true"
+        @blur="focus = false"
       >
       <slot name="postfixIcon"></slot>
     </div>

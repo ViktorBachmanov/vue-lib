@@ -177,6 +177,7 @@ function handleClickScopedSlot(item) {
       v-model:error="error"
       id="emailInputId"
       label="Email"
+      focus-border-color="magenta"
     />
 
     <InputVB 
@@ -214,6 +215,7 @@ function handleClickScopedSlot(item) {
       placeholder="Опишите подробно"
       :placeholderCSS="{ fontSize: '16px', color: 'blue' }"
       errorColor="red"
+      focus-border-color="magenta"
     />
 
     <pre 
